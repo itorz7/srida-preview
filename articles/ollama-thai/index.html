@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="th">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ollama ภาษาไทย: ติดตั้งและรัน LLM ภาษาไทยในเครื่อง — Srida.ai</title>
+<meta name="description" content="วิธีติดตั้ง Ollama บน Windows, Mac และ Linux แล้วรันโมเดลภาษาไทยอย่าง Typhoon, OpenThai และ Sailor2 พร้อมวิธีเลือกขนาดโมเดลให้พอดีกับเครื่อง และเรียกใช้ผ่าน API">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://srida.ai/articles/ollama-thai/">
+<link rel="alternate" hreflang="th" href="https://srida.ai/articles/ollama-thai/">
+<link rel="alternate" hreflang="x-default" href="https://srida.ai/articles/ollama-thai/">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+<meta property="og:site_name" content="Srida.ai">
+<meta property="og:locale" content="th_TH">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://srida.ai/articles/ollama-thai/">
+<meta property="og:title" content="Ollama ภาษาไทย: ติดตั้งและรัน LLM ภาษาไทยในเครื่อง — Srida.ai">
+<meta property="og:description" content="วิธีติดตั้ง Ollama บน Windows, Mac และ Linux แล้วรันโมเดลภาษาไทยอย่าง Typhoon, OpenThai และ Sailor2 พร้อมวิธีเลือกขนาดโมเดลให้พอดีกับเครื่อง และเรียกใช้ผ่าน API">
+<meta property="og:image" content="https://srida.ai/og/ollama-thai.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ollama ภาษาไทย: ติดตั้งและรัน LLM ภาษาไทยในเครื่อง">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ollama ภาษาไทย: ติดตั้งและรัน LLM ภาษาไทยในเครื่อง — Srida.ai">
+<meta name="twitter:description" content="วิธีติดตั้ง Ollama บน Windows, Mac และ Linux แล้วรันโมเดลภาษาไทยอย่าง Typhoon, OpenThai และ Sailor2 พร้อมวิธีเลือกขนาดโมเดลให้พอดีกับเครื่อง และเรียกใช้ผ่าน API">
+<meta name="twitter:image" content="https://srida.ai/og/ollama-thai.png">
+<meta property="article:published_time" content="2026-11-20">
+<meta property="article:modified_time" content="2026-11-20">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/fonts/prompt-600-thai.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/prompt-400-thai.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/outfit-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<script type="module" src="/js/page.js"></script>
+<noscript><style>.show-panel[hidden],.panel[hidden]{display:grid!important}.show-tabs,.seg,.feature,[data-products]{display:none}</style></noscript>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://srida.ai/#org","name":"Srida.ai","url":"https://srida.ai/","logo":{"@type":"ImageObject","url":"https://srida.ai/assets/icons/icon-512.png","width":512,"height":512},"slogan":"ผู้นำด้าน Local AI ในประเทศไทย","description":"Srida.ai ติดตั้ง AI ที่รันบนเครื่องหรือเซิร์ฟเวอร์ขององค์กร ครบ 5 ด้าน: LLM ถอดเสียง แปลงข้อความเป็นเสียง แปลภาษา และอ่านภาพ (OCR) สำหรับงานภาษาไทย","areaServed":{"@type":"Country","name":"Thailand"},"knowsLanguage":["th","en"]},{"@type":"Article","@id":"https://srida.ai/articles/ollama-thai/#article","headline":"Ollama ภาษาไทย: ติดตั้งและรัน LLM ภาษาไทยในเครื่อง","description":"วิธีติดตั้ง Ollama บน Windows, Mac และ Linux แล้วรันโมเดลภาษาไทยอย่าง Typhoon, OpenThai และ Sailor2 พร้อมวิธีเลือกขนาดโมเดลให้พอดีกับเครื่อง และเรียกใช้ผ่าน API","inLanguage":"th","datePublished":"2026-11-20","dateModified":"2026-11-20","mainEntityOfPage":"https://srida.ai/articles/ollama-thai/","image":["https://srida.ai/og/ollama-thai.png"],"author":{"@id":"https://srida.ai/#org"},"publisher":{"@id":"https://srida.ai/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"https://srida.ai/"},{"@type":"ListItem","position":2,"name":"บทความ","item":"https://srida.ai/articles/"},{"@type":"ListItem","position":3,"name":"Ollama ภาษาไทย: ติดตั้งและรัน LLM ภาษาไทยในเครื่อง","item":"https://srida.ai/articles/ollama-thai/"}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">ข้ามไปเนื้อหา</a>
+<header class="bar" id="bar">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/logo.svg" alt="Srida.ai" width="112" height="32"></a>
+    <nav class="nav" id="nav" aria-label="เมนูหลัก"><ul><li><a href="/#products">AI 5 ด้าน</a></li><li><a href="/#industries">อุตสาหกรรม</a></li><li><a href="/#models">โมเดลภาษาไทย</a></li><li><a href="/articles/" aria-current="page">บทความ</a></li><li><a href="/products/">ร้านค้า</a></li></ul></nav>
+    <a class="btn btn--s bar-cta" href="/#contact">ติดต่อทีมงาน</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="เปิดเมนู"><span></span><span></span></button>
+  </div>
+</header>
+<main id="main">
+
+<div class="wrap"><nav class="crumb" aria-label="ตำแหน่งหน้า"><ol><li><a href="/">หน้าแรก</a></li><li><a href="/articles/">บทความ</a></li><li><a href="/articles/ollama-thai/" aria-current="page"><span class="tw">Ollama <span class="nw">ภาษาไทย</span>: <span class="nw">ติดตั้ง</span>และรัน LLM <span class="nw">ภาษาไทย</span>ในเครื่อง</span></a></li></ol></nav></div>
+<article class="wrap" aria-labelledby="h-art">
+  <header class="art-head">
+    <h1 class="t-h1" id="h-art"><span class="tw">Ollama <span class="nw">ภาษาไทย</span>: <span class="nw">ติดตั้ง</span>และรัน LLM <span class="nw">ภาษาไทย</span>ในเครื่อง</span></h1>
+    <p class="lead"><span class="tw">วิธี<span class="nw">ติดตั้ง</span> Ollama บน Windows, Mac และ Linux แล้วรัน<span class="nw">โมเดล</span><span class="nw">ภาษาไทย</span>อย่าง Typhoon, OpenThai และ Sailor2 พร้อมวิธีเลือกขนาด<span class="nw">โมเดล</span>ให้พอดีกับเครื่อง และเรียกใช้ผ่าน API</span></p>
+    <p class="art-meta"><span>โดยทีม Srida.ai</span><span>อัปเดต <time datetime="2026-11-20">20 พ.ย. 2569</time></span><span>อ่าน 7 นาที</span></p>
+  </header>
+  <div class="art">
+    <nav class="toc" aria-label="ในบทความนี้"><h2>ในบทความนี้</h2><ol><li><a href="#what">Ollama คืออะไร</a></li><li><a href="#install"><span class="tw"><span class="nw">ติดตั้ง</span> Ollama</span></a></li><li><a href="#choose"><span class="tw">เลือก<span class="nw">โมเดล</span><span class="nw">ภาษาไทย</span>ให้พอดีกับเครื่อง</span></a></li><li><a href="#run"><span class="tw">รันและคุย<span class="nw">ภาษาไทย</span></span></a></li><li><a href="#gguf">รันไฟล์ GGUF จาก Hugging Face</a></li><li><a href="#api">เรียกใช้ผ่าน API</a></li><li><a href="#trouble">ปัญหาที่พบบ่อย</a></li></ol></nav>
+    <div class="art-body"><section id="what" aria-labelledby="h-what"><h2 id="h-what">Ollama คืออะไร</h2>
+<p><span class="tw">Ollama เป็นโปรแกรมฟรีสำหรับ<span class="nw">ดาวน์โหลด</span>และรัน<span class="nw">โมเดล</span>ภาษาในเครื่อง ใช้ได้ทั้ง Linux, macOS และ Windows สั่ง</span> <code>ollama run</code> <span class="tw">ตามด้วยชื่อ<span class="nw">โมเดล</span> โปรแกรมจะ<span class="nw">ดาวน์โหลด</span><span class="nw">โมเดล</span>และเปิดหน้าแชตใน<span class="nw">เทอร์มินัล</span>ให้</span></p>
+<p class="callout"><span class="tw">Ollama มีทั้ง<span class="nw">โมเดล</span>ที่รันในเครื่องและ<span class="nw">โมเดล</span>บน<span class="nw">คลาวด์</span>ของ Ollama ถ้าต้องการให้<span class="nw">ข้อมูล</span>อยู่ในเครื่องเท่านั้น ให้เลือกรุ่นที่รันในเครื่อง</span></p></section><section id="install" aria-labelledby="h-install"><h2 id="h-install"><span class="tw"><span class="nw">ติดตั้ง</span> Ollama</span></h2>
+<h3>Linux และ macOS</h3>
+<div class="cmd"><code><span class="p">$ </span>curl -fsSL <span class="ph">https://ollama.com/install.sh | sh</span></code><button class="copy" type="button">คัดลอก</button></div>
+<p><span class="tw">บน Mac <span class="nw">ดาวน์โหลด</span>แอปจาก</span> <a href="https://ollama.com/download" rel="noopener" target="_blank">ollama.com/download</a> ได้เช่นกัน</p>
+<h3>Windows</h3>
+<p><span class="tw">เปิด PowerShell แล้วรัน<span class="nw">คำสั่ง</span>นี้ หรือ<span class="nw">ดาวน์โหลด</span>ตัว<span class="nw">ติดตั้ง</span> OllamaSetup.exe จากหน้าเว็บของ Ollama</span></p>
+<div class="cmd"><code><span class="p">$ </span>irm <span class="ph">https://ollama.com/install.ps1 | iex</span></code><button class="copy" type="button">คัดลอก</button></div></section><section id="choose" aria-labelledby="h-choose"><h2 id="h-choose"><span class="tw">เลือก<span class="nw">โมเดล</span><span class="nw">ภาษาไทย</span>ให้พอดีกับเครื่อง</span></h2>
+<p><span class="tw">เริ่มจากรุ่นเล็กก่อน ถ้าเครื่องไหวค่อยขยับขึ้น ขนาดไฟล์ด้านล่างมาจาก ollama.com และไฟล์ GGUF ทางการของ<span class="nw">ผู้พัฒนา</span></span></p>
+<div class="tbl"><table><thead><tr><th scope="col"><span class="nw">โมเดล</span></th><th scope="col">ขนาดไฟล์</th><th scope="col"><span class="nw">คำสั่ง</span></th><th scope="col">เหมาะกับ</th></tr></thead><tbody><tr><td>Sailor2 1B</td><td>1.1 GB</td><td><code>ollama run sailor2:1b</code></td><td><span class="tw">เครื่องไม่มี<span class="nw">การ์ดจอ</span> RAM 8 GB</span></td></tr><tr><td>Typhoon 2.5 4B</td><td>2.5 GB</td><td><code>ollama run scb10x/typhoon2.5-qwen3-4b</code></td><td><span class="tw"><span class="nw">โน้ตบุ๊ก</span>ทั่วไป</span></td></tr><tr><td>OpenThai 1.5 7B</td><td>4.7 GB</td><td><code>ollama run openthai/openthai-1.5-7b</code></td><td><span class="tw">หน้า<span class="nw">โมเดล</span>แนะนำ RAM ราว 8 GB</span></td></tr><tr><td>Typhoon 2.1 12B</td><td>7.3 GB</td><td><code>ollama run scb10x/typhoon2.1-gemma3-12b</code></td><td><span class="tw"><span class="nw">การ์ดจอ</span>หรือ Mac <span class="nw">หน่วยความจำ</span> 16 GB</span></td></tr><tr><td>OpenThai 2.0 27B</td><td>16.8 GB</td><td><code>ollama run openthai/openthai2.0-qwen3.8-27b</code></td><td><span class="tw"><span class="nw">หน่วยความจำ</span> 24 GB ขึ้นไป</span></td></tr></tbody></table></div></section><section id="run" aria-labelledby="h-run"><h2 id="h-run"><span class="tw">รันและคุย<span class="nw">ภาษาไทย</span></span></h2>
+<p><span class="tw">รัน<span class="nw">คำสั่ง</span>ด้านล่าง ครั้งแรกจะ<span class="nw">ดาวน์โหลด</span><span class="nw">โมเดล</span>ก่อน เมื่อเสร็จแล้วพิมพ์คำถาม<span class="nw">ภาษาไทย</span>ได้ทันที พิมพ์</span> <code>/bye</code> เพื่อออก</p>
+<div class="cmd"><code><span class="p">$ </span>ollama run <span class="ph">scb10x/typhoon2.5-qwen3-4b</span></code><button class="copy" type="button">คัดลอก</button></div></section><section id="gguf" aria-labelledby="h-gguf"><h2 id="h-gguf">รันไฟล์ GGUF จาก Hugging Face</h2>
+<p><span class="tw"><span class="nw">โมเดล</span><span class="nw">ภาษาไทย</span>บางตัวยังไม่มีบนคลังของ Ollama แต่มีไฟล์ GGUF บน Hugging Face รันได้ตรง ๆ ด้วยรูปแบบ<span class="nw">คำสั่ง</span>นี้ โดยแทนชื่อผู้ใช้และชื่อคลังของ<span class="nw">โมเดล</span> ถ้าคลังมีไฟล์ Q4_K_M ระบบจะเลือกให้เอง หรือระบุเองต่อท้ายได้ เช่น</span> <code>:Q8_0</code></p>
+<div class="cmd"><code><span class="p">$ </span>ollama run <span class="ph">hf.co/{ชื่อผู้ใช้}/{ชื่อคลัง}</span></code><button class="copy" type="button">คัดลอก</button></div>
+<p>ที่มา: <a href="https://huggingface.co/docs/hub/en/ollama" rel="noopener" target="_blank"><span class="tw"><span class="nw">เอกสาร</span>ของ Hugging Face เรื่องการใช้กับ Ollama</span></a></p></section><section id="api" aria-labelledby="h-api"><h2 id="h-api">เรียกใช้ผ่าน API</h2>
+<p>ระหว่างที่ Ollama ทำงาน จะเปิด API ที่ <code>http://localhost:11434</code> <span class="tw">ให้โปรแกรมอื่นในเครื่องเรียกใช้ได้ <span class="nw">ตัวอย่าง</span>นี้ส่งคำถาม<span class="nw">ภาษาไทย</span>หนึ่งข้อ</span></p>
+<div class="code"><div class="code-bar"><span>Shell</span><button class="copy" type="button">คัดลอก</button></div><pre><code>curl http://localhost:11434/api/chat -d &#x27;{
+  &quot;model&quot;: &quot;scb10x/typhoon2.5-qwen3-4b&quot;,
+  &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;สรุปข้อดีของ Local AI สั้น ๆ&quot;}],
+  &quot;stream&quot;: false
+}&#x27;</code></pre></div></section><section id="trouble" aria-labelledby="h-trouble"><h2 id="h-trouble">ปัญหาที่พบบ่อย</h2>
+<ul>
+<li><strong>ตอบช้ามาก</strong> <span class="tw">ลองรุ่นที่เล็กลง หรือใช้เครื่องที่มี<span class="nw">การ์ดจอ</span></span></li>
+<li><strong><span class="tw"><span class="nw">หน่วยความจำ</span>ไม่พอ</span></strong> <span class="tw">เลือกรุ่นที่ไฟล์เล็กกว่า<span class="nw">หน่วยความจำ</span>ที่มีพอสมควร</span></li>
+<li><strong><span class="tw">ตอบเป็น<span class="nw">ภาษาอังกฤษ</span>ปน</span></strong> <span class="tw">เลือก<span class="nw">โมเดล</span>ที่ฝึกมาเพื่อ<span class="nw">ภาษาไทย</span> และบอกในคำถามว่าให้ตอบเป็น<span class="nw">ภาษาไทย</span></span></li>
+</ul>
+<p><span class="tw">อยากได้ระบบแชตที่ทั้งทีมใช้ร่วมกันพร้อม<span class="nw">เอกสาร</span>ของ<span class="nw">องค์กร</span> ดูหน้า</span> <a href="/llm/"><span class="tw">LLM <span class="nw">ภาษาไทย</span>สำหรับ<span class="nw">องค์กร</span></span></a></p></section>
+      <aside class="art-foot" aria-labelledby="h-more-art"><h2 id="h-more-art">อ่านต่อ</h2><ul><li><a href="/articles/what-is-local-ai/"><span class="tw"><span class="nw">Local AI</span> คืออะไร และรัน AI ในเครื่องได้อย่างไร</span></a></li><li><a href="/articles/thai-speech-to-text/"><span class="tw"><span class="nw">ถอดเสียง</span><span class="nw">ภาษาไทย</span>ในเครื่อง ด้วย<span class="nw">โมเดล</span>เปิดที่<span class="nw">ดาวน์โหลด</span>ได้</span></a></li><li><a href="/articles/">บทความทั้งหมด</a></li></ul></aside>
+    </div>
+  </div>
+</article>
+<section class="sec" id="contact" aria-labelledby="h-contact">
+  <div class="wrap">
+    <div class="cta-band">
+      <div class="cta-copy">
+        <h2 class="t-h2" id="h-contact">เล่าโจทย์ของคุณ แล้วเราช่วยเลือก AI ที่พอดีกับงาน</h2>
+        <ul class="ticks">
+          <li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="tw">อยากให้ AI ช่วยงานอะไร เช่น <span class="nw">ถอดเสียง</span><span class="nw">ประชุม</span> หรือถามตอบ<span class="nw">เอกสาร</span></span></li>
+          <li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="tw"><span class="nw">ข้อมูล</span>เป็นแบบไหน และอยู่ที่ใดบ้าง</span></li>
+          <li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="tw">มีเครื่องหรือ<span class="nw">เซิร์ฟเวอร์</span>อะไรอยู่แล้ว</span></li>
+        </ul>
+        <div class="cta-actions">
+          <a class="btn btn--light" data-contact aria-disabled="true">ช่องทางติดต่อเปิดเร็ว ๆ นี้</a>
+          <a class="link link--light" href="/products/">ดูสินค้าและบริการ</a>
+        </div>
+      </div>
+      <picture class="mascot cta-mascot"><source type="image/avif" srcset="/assets/mascot/baksida-wave-360.avif 360w, /assets/mascot/baksida-wave-720.avif 720w" sizes="(min-width: 900px) 300px, 200px"><img src="/assets/mascot/baksida-wave-720.webp" srcset="/assets/mascot/baksida-wave-360.webp 360w, /assets/mascot/baksida-wave-720.webp 720w" sizes="(min-width: 900px) 300px, 200px" width="720" height="805" alt="บักสีดาโบกมือทักทาย" loading="lazy" decoding="async"></picture>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand"><a href="/"><img src="/assets/logo.svg" alt="Srida.ai" width="140" height="40" loading="lazy"></a><p>ผู้นำด้าน Local AI ในประเทศไทย ติดตั้ง AI ภาษาไทยให้ทำงานบนเครื่องและในองค์กรของคุณ</p></div>
+      <nav class="foot-cols" aria-label="ลิงก์ท้ายหน้า">
+        <div><h2>AI 5 ด้าน</h2><ul><li><a href="/llm/">LLM ภาษาไทย</a></li><li><a href="/asr/">ถอดเสียงภาษาไทย</a></li><li><a href="/tts/">แปลงข้อความเป็นเสียง</a></li><li><a href="/mt/">แปลภาษา AI</a></li><li><a href="/vision/">OCR ภาษาไทย</a></li></ul></div>
+        <div><h2>เรียนรู้</h2><ul><li><a href="/articles/what-is-local-ai/">Local AI คืออะไร</a></li><li><a href="/articles/ollama-thai/">Ollama ภาษาไทย</a></li><li><a href="/articles/thai-speech-to-text/">ถอดเสียงในเครื่อง</a></li><li><a href="/articles/">บทความทั้งหมด</a></li><li><a href="/#faq">คำถามที่พบบ่อย</a></li></ul></div>
+        <div><h2>Srida.ai</h2><ul><li><a href="/products/">สินค้าและบริการ</a></li><li><a href="/#models">โมเดลภาษาไทย</a></li><li><a href="/#industries">อุตสาหกรรม</a></li><li><a href="/#contact">ติดต่อทีมงาน</a></li></ul></div>
+      </nav>
+    </div>
+    <p class="foot-legal">© 2026 Srida.ai · ชื่อโมเดลและเครื่องหมายการค้าเป็นของผู้พัฒนาแต่ละราย</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="th">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ถอดเสียงภาษาไทยในเครื่อง ด้วยโมเดลเปิดที่ดาวน์โหลดได้ — Srida.ai</title>
+<meta name="description" content="เปรียบเทียบโมเดลถอดเสียงภาษาไทยที่รันในเครื่องได้ ทั้ง Typhoon ASR, Thonburian Whisper, Pathumma Whisper และ OpenThai ASR พร้อมสัญญาอนุญาต วิธีเลือกแบบถอดไฟล์หรือแบบสด และตัวอย่างโค้ด">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://srida.ai/articles/thai-speech-to-text/">
+<link rel="alternate" hreflang="th" href="https://srida.ai/articles/thai-speech-to-text/">
+<link rel="alternate" hreflang="x-default" href="https://srida.ai/articles/thai-speech-to-text/">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+<meta property="og:site_name" content="Srida.ai">
+<meta property="og:locale" content="th_TH">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://srida.ai/articles/thai-speech-to-text/">
+<meta property="og:title" content="ถอดเสียงภาษาไทยในเครื่อง ด้วยโมเดลเปิดที่ดาวน์โหลดได้ — Srida.ai">
+<meta property="og:description" content="เปรียบเทียบโมเดลถอดเสียงภาษาไทยที่รันในเครื่องได้ ทั้ง Typhoon ASR, Thonburian Whisper, Pathumma Whisper และ OpenThai ASR พร้อมสัญญาอนุญาต วิธีเลือกแบบถอดไฟล์หรือแบบสด และตัวอย่างโค้ด">
+<meta property="og:image" content="https://srida.ai/og/thai-speech-to-text.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ถอดเสียงภาษาไทยในเครื่อง ด้วยโมเดลเปิดที่ดาวน์โหลดได้">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ถอดเสียงภาษาไทยในเครื่อง ด้วยโมเดลเปิดที่ดาวน์โหลดได้ — Srida.ai">
+<meta name="twitter:description" content="เปรียบเทียบโมเดลถอดเสียงภาษาไทยที่รันในเครื่องได้ ทั้ง Typhoon ASR, Thonburian Whisper, Pathumma Whisper และ OpenThai ASR พร้อมสัญญาอนุญาต วิธีเลือกแบบถอดไฟล์หรือแบบสด และตัวอย่างโค้ด">
+<meta name="twitter:image" content="https://srida.ai/og/thai-speech-to-text.png">
+<meta property="article:published_time" content="2026-11-20">
+<meta property="article:modified_time" content="2026-11-20">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/fonts/prompt-600-thai.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/prompt-400-thai.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/outfit-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles.css">
+<script type="module" src="/js/page.js"></script>
+<noscript><style>.show-panel[hidden],.panel[hidden]{display:grid!important}.show-tabs,.seg,.feature,[data-products]{display:none}</style></noscript>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://srida.ai/#org","name":"Srida.ai","url":"https://srida.ai/","logo":{"@type":"ImageObject","url":"https://srida.ai/assets/icons/icon-512.png","width":512,"height":512},"slogan":"ผู้นำด้าน Local AI ในประเทศไทย","description":"Srida.ai ติดตั้ง AI ที่รันบนเครื่องหรือเซิร์ฟเวอร์ขององค์กร ครบ 5 ด้าน: LLM ถอดเสียง แปลงข้อความเป็นเสียง แปลภาษา และอ่านภาพ (OCR) สำหรับงานภาษาไทย","areaServed":{"@type":"Country","name":"Thailand"},"knowsLanguage":["th","en"]},{"@type":"Article","@id":"https://srida.ai/articles/thai-speech-to-text/#article","headline":"ถอดเสียงภาษาไทยในเครื่อง ด้วยโมเดลเปิดที่ดาวน์โหลดได้","description":"เปรียบเทียบโมเดลถอดเสียงภาษาไทยที่รันในเครื่องได้ ทั้ง Typhoon ASR, Thonburian Whisper, Pathumma Whisper และ OpenThai ASR พร้อมสัญญาอนุญาต วิธีเลือกแบบถอดไฟล์หรือแบบสด และตัวอย่างโค้ด","inLanguage":"th","datePublished":"2026-11-20","dateModified":"2026-11-20","mainEntityOfPage":"https://srida.ai/articles/thai-speech-to-text/","image":["https://srida.ai/og/thai-speech-to-text.png"],"author":{"@id":"https://srida.ai/#org"},"publisher":{"@id":"https://srida.ai/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"หน้าแรก","item":"https://srida.ai/"},{"@type":"ListItem","position":2,"name":"บทความ","item":"https://srida.ai/articles/"},{"@type":"ListItem","position":3,"name":"ถอดเสียงภาษาไทยในเครื่อง ด้วยโมเดลเปิดที่ดาวน์โหลดได้","item":"https://srida.ai/articles/thai-speech-to-text/"}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">ข้ามไปเนื้อหา</a>
+<header class="bar" id="bar">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/logo.svg" alt="Srida.ai" width="112" height="32"></a>
+    <nav class="nav" id="nav" aria-label="เมนูหลัก"><ul><li><a href="/#products">AI 5 ด้าน</a></li><li><a href="/#industries">อุตสาหกรรม</a></li><li><a href="/#models">โมเดลภาษาไทย</a></li><li><a href="/articles/" aria-current="page">บทความ</a></li><li><a href="/products/">ร้านค้า</a></li></ul></nav>
+    <a class="btn btn--s bar-cta" href="/#contact">ติดต่อทีมงาน</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="เปิดเมนู"><span></span><span></span></button>
+  </div>
+</header>
+<main id="main">
+
+<div class="wrap"><nav class="crumb" aria-label="ตำแหน่งหน้า"><ol><li><a href="/">หน้าแรก</a></li><li><a href="/articles/">บทความ</a></li><li><a href="/articles/thai-speech-to-text/" aria-current="page"><span class="tw"><span class="nw">ถอดเสียง</span><span class="nw">ภาษาไทย</span>ในเครื่อง ด้วย<span class="nw">โมเดล</span>เปิดที่<span class="nw">ดาวน์โหลด</span>ได้</span></a></li></ol></nav></div>
+<article class="wrap" aria-labelledby="h-art">
+  <header class="art-head">
+    <h1 class="t-h1" id="h-art"><span class="tw"><span class="nw">ถอดเสียง</span><span class="nw">ภาษาไทย</span>ในเครื่อง ด้วย<span class="nw">โมเดล</span>เปิดที่<span class="nw">ดาวน์โหลด</span>ได้</span></h1>
+    <p class="lead"><span class="tw">เปรียบเทียบ<span class="nw">โมเดล</span><span class="nw">ถอดเสียง</span><span class="nw">ภาษาไทย</span>ที่รันในเครื่องได้ ทั้ง Typhoon ASR, Thonburian Whisper, Pathumma Whisper และ OpenThai ASR พร้อม<span class="nw">สัญญาอนุญาต</span> วิธีเลือกแบบถอดไฟล์หรือแบบสด และ<span class="nw">ตัวอย่าง</span>โค้ด</span></p>
+    <p class="art-meta"><span>โดยทีม Srida.ai</span><span>อัปเดต <time datetime="2026-11-20">20 พ.ย. 2569</time></span><span>อ่าน 6 นาที</span></p>
+  </header>
+  <div class="art">
+    <nav class="toc" aria-label="ในบทความนี้"><h2>ในบทความนี้</h2><ol><li><a href="#why"><span class="tw">ทำไมต้อง<span class="nw">ถอดเสียง</span>ในเครื่อง</span></a></li><li><a href="#models"><span class="tw"><span class="nw">โมเดล</span><span class="nw">ถอดเสียง</span><span class="nw">ภาษาไทย</span>ที่<span class="nw">ดาวน์โหลด</span>ได้</span></a></li><li><a href="#batch-or-live">ถอดจากไฟล์ หรือถอดแบบสด</a></li><li><a href="#try"><span class="tw">ลอง<span class="nw">ถอดเสียง</span>ไฟล์แรก</span></a></li><li><a href="#summary"><span class="tw">ต่อยอด: สรุปการ<span class="nw">ประชุม</span>ด้วย LLM</span></a></li><li><a href="#license"><span class="tw">เรื่อง<span class="nw">สัญญาอนุญาต</span>ที่ควรรู้</span></a></li></ol></nav>
+    <div class="art-body"><section id="why" aria-labelledby="h-why"><h2 id="h-why"><span class="tw">ทำไมต้อง<span class="nw">ถอดเสียง</span>ในเครื่อง</span></h2>
+<p><span class="tw">เสียง<span class="nw">ประชุม</span> สายสนทนากับลูกค้า และบันทึกของแพทย์ มักมี<span class="nw">ข้อมูล</span><span class="nw">ส่วนบุคคล</span>หรือ<span class="nw">ข้อมูล</span>ลับ การ<span class="nw">ถอดเสียง</span>ในเครื่องของ<span class="nw">องค์กร</span>ทำให้ไฟล์เสียงไม่ต้องส่งออกไปข้างนอก และเมื่อต้อง<span class="nw">ถอดเสียง</span>จำนวนมาก ก็ไม่มีค่าบริการตามจำนวนนาที</span></p></section><section id="models" aria-labelledby="h-models"><h2 id="h-models"><span class="tw"><span class="nw">โมเดล</span><span class="nw">ถอดเสียง</span><span class="nw">ภาษาไทย</span>ที่<span class="nw">ดาวน์โหลด</span>ได้</span></h2>
+<p><span class="tw"><span class="nw">ข้อมูล</span>จากหน้า<span class="nw">โมเดล</span>ทางการ ณ 19 พ.ย. 2569</span></p>
+<div class="tbl"><table><thead><tr><th scope="col"><span class="nw">โมเดล</span></th><th scope="col"><span class="nw">ผู้พัฒนา</span></th><th scope="col">ขนาด</th><th scope="col"><span class="nw">สัญญาอนุญาต</span></th><th scope="col">จุดเด่น</th></tr></thead><tbody><tr><td>Typhoon ASR Real-time</td><td>SCB 10X</td><td>114M</td><td>CC-BY-4.0</td><td><span class="tw">ถอดแบบสด <span class="nw">ผู้พัฒนา</span>ระบุว่ารันบน<span class="nw">ซีพียู</span>ทั่วไปได้</span></td></tr><tr><td>Typhoon Whisper Turbo</td><td>SCB 10X</td><td>0.81B</td><td>MIT</td><td>ฝึกด้วยเสียงไทยราว 11,000 ชั่วโมง</td></tr><tr><td>Typhoon ASR Qwen 1.7B (ctx)</td><td>SCB 10X</td><td>2.07B</td><td>Apache 2.0</td><td>รับรายชื่อคำเฉพาะเพื่อช่วยให้ถอดถูกขึ้น</td></tr><tr><td>Thonburian Whisper</td><td>มหาวิทยาลัยมหิดล</td><td>small ถึง large-v3</td><td>Apache 2.0 · MIT (distilled)</td><td>มีหลายขนาด รวมรุ่นย่อขนาด</td></tr><tr><td>Pathumma Whisper</td><td>NECTEC</td><td>1.54B</td><td>Apache 2.0</td><td><span class="tw">Whisper large-v3 ที่ปรับมาเพื่อ<span class="nw">ภาษาไทย</span></span></td></tr><tr><td>Pathumma STT FastConformer</td><td>NECTEC</td><td>114M</td><td>CC-BY-4.0</td><td>ถอดแบบสด รองรับไทยปนอังกฤษ</td></tr><tr><td>OpenThai 2.0 ASR Streaming</td><td>iApp ร่วมกับ AIEAT</td><td>0.64B</td><td>OpenMDW 1.1</td><td>หน่วง 80–1,120 มิลลิวินาที มี GGUF</td></tr></tbody></table></div><p><span class="tw">ดูลิงก์ต้นทางของแต่ละ<span class="nw">โมเดล</span>ได้ที่หน้า</span> <a href="/asr/"><span class="nw">ถอดเสียง</span><span class="nw">ภาษาไทย</span></a></p></section><section id="batch-or-live" aria-labelledby="h-batch-or-live"><h2 id="h-batch-or-live">ถอดจากไฟล์ หรือถอดแบบสด</h2>
+<p><strong>ถอดจากไฟล์</strong> <span class="tw">เหมาะกับไฟล์<span class="nw">ประชุม</span>หรือคลิปที่บันทึกไว้แล้ว <span class="nw">โมเดล</span>ตระกูล Whisper อย่าง Thonburian Whisper, Pathumma Whisper และ Typhoon Whisper <span class="nw">ใช้งาน</span>แบบนี้ได้ดี</span></p>
+<p><strong>ถอดแบบสด</strong> <span class="tw">เหมาะกับการพิมพ์ด้วยเสียงหรือคำบรรยายสด ต้องใช้<span class="nw">โมเดล</span>แบบสตรีมมิงที่หน่วงต่ำ เช่น Typhoon ASR Real-time, Pathumma STT FastConformer และ OpenThai 2.0 ASR Streaming</span></p></section><section id="try" aria-labelledby="h-try"><h2 id="h-try"><span class="tw">ลอง<span class="nw">ถอดเสียง</span>ไฟล์แรก</span></h2>
+<p><span class="tw"><span class="nw">ตัวอย่าง</span>นี้ใช้ Thonburian Whisper ผ่านไลบรารี transformers ต้อง<span class="nw">ติดตั้ง</span> Python และ ffmpeg ในเครื่องก่อน แล้ว<span class="nw">ติดตั้ง</span>ไลบรารีด้วย</span> <code>pip install transformers torch</code></p>
+<div class="code"><div class="code-bar"><span>Python</span><button class="copy" type="button">คัดลอก</button></div><pre><code>from transformers import pipeline
+
+asr = pipeline(
+    &quot;automatic-speech-recognition&quot;,
+    model=&quot;biodatlab/whisper-th-large-v3-combined&quot;,
+    chunk_length_s=30,
+)
+print(asr(&quot;meeting.wav&quot;)[&quot;text&quot;])</code></pre></div>
+<p><span class="tw">รุ่น large-v3 มีขนาดใหญ่ ถ้าเครื่องไม่มี<span class="nw">การ์ดจอ</span>จะช้า ลองรุ่นเล็กกว่าในตระกูลเดียวกัน หรือใช้ Typhoon ASR Real-time ที่<span class="nw">ติดตั้ง</span>ด้วย</span> <code>pip install typhoon-asr</code></p></section><section id="summary" aria-labelledby="h-summary"><h2 id="h-summary"><span class="tw">ต่อยอด: สรุปการ<span class="nw">ประชุม</span>ด้วย LLM</span></h2>
+<p><span class="tw">เมื่อได้<span class="nw">ข้อความ</span>จากการ<span class="nw">ถอดเสียง</span>แล้ว ส่งต่อให้ LLM <span class="nw">ภาษาไทย</span>ในเครื่องช่วยสรุปเป็นรายงานการ<span class="nw">ประชุม</span>และรายการงานที่ต้องทำได้ เช่น รัน Typhoon 2.5 ผ่าน Ollama แล้วส่ง<span class="nw">ข้อความ</span>ที่ถอดได้เข้าไปพร้อม<span class="nw">คำสั่ง</span>ให้สรุป ทุกขั้นตอนอยู่ในเครื่องเดียวกัน ดูวิธี<span class="nw">ติดตั้ง</span>ได้ที่</span> <a href="/articles/ollama-thai/"><span class="tw">Ollama <span class="nw">ภาษาไทย</span></span></a></p></section><section id="license" aria-labelledby="h-license"><h2 id="h-license"><span class="tw">เรื่อง<span class="nw">สัญญาอนุญาต</span>ที่ควรรู้</span></h2>
+<ul>
+<li><strong>MIT และ Apache 2.0</strong> <span class="tw">ใช้<span class="nw">เชิงพาณิชย์</span>ได้ โดยเก็บ<span class="nw">ข้อความ</span><span class="nw">สัญญาอนุญาต</span>ไว้ตามเงื่อนไข</span></li>
+<li><strong>CC-BY-4.0</strong> <span class="tw">ใช้ได้ แต่ต้องระบุที่มาของ<span class="nw">โมเดล</span></span></li>
+<li><strong>OpenMDW 1.1</strong> <span class="tw">อ่านเงื่อนไขในหน้า<span class="nw">โมเดล</span>ก่อนนำไปใช้</span></li>
+</ul>
+<p><span class="tw">ถ้าไม่แน่ใจ ทีม Srida ช่วยตรวจและเลือก<span class="nw">โมเดล</span>ที่ใช้ได้ตามเงื่อนไขของ<span class="nw">องค์กร</span>คุณ</span></p></section>
+      <aside class="art-foot" aria-labelledby="h-more-art"><h2 id="h-more-art">อ่านต่อ</h2><ul><li><a href="/articles/what-is-local-ai/"><span class="tw"><span class="nw">Local AI</span> คืออะไร และรัน AI ในเครื่องได้อย่างไร</span></a></li><li><a href="/articles/ollama-thai/"><span class="tw">Ollama <span class="nw">ภาษาไทย</span>: <span class="nw">ติดตั้ง</span>และรัน LLM <span class="nw">ภาษาไทย</span>ในเครื่อง</span></a></li><li><a href="/articles/">บทความทั้งหมด</a></li></ul></aside>
+    </div>
+  </div>
+</article>
+<section class="sec" id="contact" aria-labelledby="h-contact">
+  <div class="wrap">
+    <div class="cta-band">
+      <div class="cta-copy">
+        <h2 class="t-h2" id="h-contact">เล่าโจทย์ของคุณ แล้วเราช่วยเลือก AI ที่พอดีกับงาน</h2>
+        <ul class="ticks">
+          <li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="tw">อยากให้ AI ช่วยงานอะไร เช่น <span class="nw">ถอดเสียง</span><span class="nw">ประชุม</span> หรือถามตอบ<span class="nw">เอกสาร</span></span></li>
+          <li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="tw"><span class="nw">ข้อมูล</span>เป็นแบบไหน และอยู่ที่ใดบ้าง</span></li>
+          <li><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="tw">มีเครื่องหรือ<span class="nw">เซิร์ฟเวอร์</span>อะไรอยู่แล้ว</span></li>
+        </ul>
+        <div class="cta-actions">
+          <a class="btn btn--light" data-contact aria-disabled="true">ช่องทางติดต่อเปิดเร็ว ๆ นี้</a>
+          <a class="link link--light" href="/products/">ดูสินค้าและบริการ</a>
+        </div>
+      </div>
+      <picture class="mascot cta-mascot"><source type="image/avif" srcset="/assets/mascot/baksida-wave-360.avif 360w, /assets/mascot/baksida-wave-720.avif 720w" sizes="(min-width: 900px) 300px, 200px"><img src="/assets/mascot/baksida-wave-720.webp" srcset="/assets/mascot/baksida-wave-360.webp 360w, /assets/mascot/baksida-wave-720.webp 720w" sizes="(min-width: 900px) 300px, 200px" width="720" height="805" alt="บักสีดาโบกมือทักทาย" loading="lazy" decoding="async"></picture>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand"><a href="/"><img src="/assets/logo.svg" alt="Srida.ai" width="140" height="40" loading="lazy"></a><p>ผู้นำด้าน Local AI ในประเทศไทย ติดตั้ง AI ภาษาไทยให้ทำงานบนเครื่องและในองค์กรของคุณ</p></div>
+      <nav class="foot-cols" aria-label="ลิงก์ท้ายหน้า">
+        <div><h2>AI 5 ด้าน</h2><ul><li><a href="/llm/">LLM ภาษาไทย</a></li><li><a href="/asr/">ถอดเสียงภาษาไทย</a></li><li><a href="/tts/">แปลงข้อความเป็นเสียง</a></li><li><a href="/mt/">แปลภาษา AI</a></li><li><a href="/vision/">OCR ภาษาไทย</a></li></ul></div>
+        <div><h2>เรียนรู้</h2><ul><li><a href="/articles/what-is-local-ai/">Local AI คืออะไร</a></li><li><a href="/articles/ollama-thai/">Ollama ภาษาไทย</a></li><li><a href="/articles/thai-speech-to-text/">ถอดเสียงในเครื่อง</a></li><li><a href="/articles/">บทความทั้งหมด</a></li><li><a href="/#faq">คำถามที่พบบ่อย</a></li></ul></div>
+        <div><h2>Srida.ai</h2><ul><li><a href="/products/">สินค้าและบริการ</a></li><li><a href="/#models">โมเดลภาษาไทย</a></li><li><a href="/#industries">อุตสาหกรรม</a></li><li><a href="/#contact">ติดต่อทีมงาน</a></li></ul></div>
+      </nav>
+    </div>
+    <p class="foot-legal">© 2026 Srida.ai · ชื่อโมเดลและเครื่องหมายการค้าเป็นของผู้พัฒนาแต่ละราย</p>
+  </div>
+</footer>
+</body>
+</html>
