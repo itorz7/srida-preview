@@ -1,7 +1,9 @@
 // Motion that follows the pointer or the scroll. site.js loads this file once the page is idle:
 // nothing here is needed to read or use the page, and none of it runs under prefers-reduced-motion.
-// GSAP + ScrollTrigger (scroll-linked movement) and Lenis (smooth wheel scrolling, mouse users only) are fetched
-// from /vendor/ on the visitor's first scroll, so they never weigh on the first paint.
+// GSAP + ScrollTrigger (scroll-linked movement) and Lenis (smooth wheel scrolling) are for mouse and trackpad users
+// only, fetched from /vendor/ on their first scroll so they never weigh on the first paint. On a touch screen the finger
+// moves the page natively and momentum scrolling runs off the main thread: transforms set from script each frame would
+// trail behind it and judder, so phones and tablets keep the CSS motion (reveals, drifting cards) and skip the libraries.
 const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -169,6 +171,7 @@ export function initFx() {
   }
   reveals();
   counters();
+  if (!fine) return;
   const go = () => {
     ['scroll', 'wheel', 'touchmove'].forEach((t) => removeEventListener(t, go));
     scrollMotion();

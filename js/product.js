@@ -1,5 +1,5 @@
 import { initSite, settlePhrases } from './site.js';
-import { loadCatalog, actions, card, el, list, phrases, priceNode, productImage, prose, stateNode } from './shop.js';
+import { loadCatalog, actions, card, el, list, phrases, priceNode, productImage, prose, stateNode, PAGE_SIZES } from './shop.js';
 
 initSite();
 
@@ -21,7 +21,7 @@ function render(p, settings, others) {
       el('a', { href: '/products/', text: 'สินค้าและบริการ' }), p.category ? ' / ' + p.category : ''),
     el('article', { class: 'pd' },
       el('div', { class: 'pd-media' },
-        productImage(p, null, false),
+        productImage(p, null, false, PAGE_SIZES),
         p.sample && el('span', { class: 'tag', text: settings.sampleLabel })),
       el('div', { class: 'pd-info' },
         el('h1', { class: 't-h1', text: p.name }),

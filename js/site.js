@@ -72,14 +72,91 @@ async function wireContact() {
   } catch {}
 }
 
+// A folding screen held like a laptop (tabletop): the fold runs across the screen, one viewport segment above the other.
+// At the top of the page nothing to read or tap may sit on the fold, so the first block that would cross it starts just
+// below it instead (a row of buttons moves as one). Further down the page scrolls across the fold like any page.
+const tabletop = matchMedia('(vertical-viewport-segments: 2)');
+const moved = new Map();
+function clearFold() {
+  if (!tabletop.matches && !moved.size) return;
+  moved.forEach((was, el) => (el.style.marginTop = was));
+  moved.clear();
+  const segs = window.viewport?.segments;
+  if (!tabletop.matches || !segs || segs.length < 2) return;
+  const [a, b] = [segs[0].y + segs[0].height - 8, segs[1].y + 8]; // page position of the fold at the top of the page, the hinge and 8px either side
+  const main = document.getElementById('main');
+  if (!main) return;
+  // the block to move: the nearest ancestor that does not share its row with a sibling (a button beside a button)
+  const block = (el) => {
+    for (let e = el; e && e !== main; e = e.parentElement) {
+      const cs = getComputedStyle(e);
+      const p = e.parentElement;
+      if (/^inline|contents/.test(cs.display) || /absolute|fixed/.test(cs.position) || /^inline/.test(getComputedStyle(p).display)) continue;
+      const r = e.getBoundingClientRect();
+      const shared = p && /flex|grid/.test(getComputedStyle(p).display) && [...p.children].some((s) => {
+        if (s === e) return false;
+        const q = s.getBoundingClientRect();
+        return q.width && q.height && q.top < r.bottom - 1 && q.bottom > r.top + 1;
+      });
+      if (!shared) return e;
+    }
+    return null;
+  };
+  const range = document.createRange();
+  const across = (r) => r.bottom + scrollY > a && r.top + scrollY < b;
+  for (let round = 0; round < 4; round++) {
+    // the highest line of text or control on the fold
+    let first = null;
+    let top = Infinity;
+    const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT);
+    for (let n; (n = walker.nextNode()); ) {
+      const el = n.parentElement;
+      if (!n.data.trim() || el.closest('[aria-hidden="true"], .sr-only') || !el.checkVisibility()) continue;
+      range.selectNodeContents(n);
+      for (const r of range.getClientRects()) {
+        if (r.top + scrollY > b) break;
+        if (across(r) && r.top < top) [first, top] = [el, r.top];
+      }
+    }
+    for (const el of main.querySelectorAll('.btn, button, input, select, textarea, [role="tab"]')) {
+      const r = el.getBoundingClientRect();
+      if (el.checkVisibility() && across(r) && r.top < top) [first, top] = [el, r.top];
+    }
+    if (!first) return;
+    const el = block(first);
+    if (!el) return;
+    const at = el.getBoundingClientRect().top + scrollY;
+    if (!moved.has(el)) moved.set(el, el.style.marginTop);
+    el.style.marginTop = `${parseFloat(getComputedStyle(el).marginTop) + Math.ceil(b - at)}px`;
+  }
+}
+
 export function initSite() {
-  settlePhrases();
-  document.fonts?.ready.then(() => settlePhrases());
+  const settle = () => {
+    settlePhrases();
+    clearFold();
+  };
+  settle();
+  document.fonts?.ready.then(settle);
   let settling = 0;
   addEventListener('resize', () => {
     cancelAnimationFrame(settling);
-    settling = requestAnimationFrame(() => settlePhrases());
+    settling = requestAnimationFrame(settle);
   });
+  tabletop.addEventListener?.('change', settle);
+  // content drawn after load (a product page reads the data file) can land on the fold: check again when main changes size
+  const main = document.getElementById('main');
+  if (main && 'ResizeObserver' in window) {
+    let again = 0;
+    let last = 0;
+    new ResizeObserver(([entry]) => {
+      const h = Math.round(entry.contentRect.height);
+      if (!tabletop.matches || h === last) return;
+      last = h;
+      cancelAnimationFrame(again);
+      again = requestAnimationFrame(clearFold);
+    }).observe(main);
+  }
 
   const bar = document.getElementById('bar');
   if (bar) {

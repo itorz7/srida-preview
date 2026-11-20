@@ -116,11 +116,14 @@ export function actions(p, settings, { small = false, other }) {
 // A product picture. A failed load is tried once more; after that, or when a product has no usable picture, the logo stands in.
 export const CARD_SIZES = '(min-width: 1100px) 300px, (min-width: 640px) 46vw, 92vw';
 const WIDE_SIZES = '(min-width: 860px) 50vw, 100vw';
+// the picture on a product's own page: half the column on a wide screen, the full width once the page stacks
+export const PAGE_SIZES = '(min-width: 1300px) 600px, (min-width: 861px) 48vw, 100vw';
 export function productImage(p, src, lazy = true, sizes = src ? WIDE_SIZES : CARD_SIZES) {
   const url = safeUrl(src || p.image);
-  // imageSmall / imageFeaturedSmall: the same picture 800 px wide, for phones
+  // imageSmall / imageFeaturedSmall: the same picture 800 px wide, for phones; imageLarge / imageFeaturedLarge: 2400 px, for 3x screens
   const small = url ? safeUrl(src ? p.imageFeaturedSmall : p.imageSmall) : '';
-  const img = el('img', { class: url ? null : 'is-fallback', src: url || LOGO, srcset: small && `${small} 800w, ${url} 1600w`, sizes: small && sizes, alt: p.imageAlt || p.name, loading: lazy && 'lazy', decoding: 'async', width: 1200, height: 1200 });
+  const large = small ? safeUrl(src ? p.imageFeaturedLarge : p.imageLarge) : '';
+  const img = el('img', { class: url ? null : 'is-fallback', src: url || LOGO, srcset: small && `${small} 800w, ${url} 1600w${large ? `, ${large} 2400w` : ''}`, sizes: small && sizes, alt: p.imageAlt || p.name, loading: lazy && 'lazy', decoding: 'async', width: 1200, height: 1200 });
   let retried = false;
   img.addEventListener('error', () => {
     if (img.classList.contains('is-fallback')) return;

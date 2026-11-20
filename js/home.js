@@ -16,6 +16,8 @@ if (show) {
   const pin = story?.querySelector('.story-pin');
   const progress = story?.querySelector('.story-prog i');
   const wide = matchMedia('(min-width: 1100px) and (min-height: 660px) and (prefers-reduced-motion: no-preference)');
+  // a folding screen held like a book is wide, but the page reads in one half of it (styles.css): no pinning there
+  const book = matchMedia('(horizontal-viewport-segments: 2)');
   let pinned = false;
   let index = 0;
 
@@ -58,8 +60,9 @@ if (show) {
       return ok;
     };
     const setMode = () => {
-      story.classList.toggle('is-story', wide.matches);
-      pinned = wide.matches && fits();
+      const room = wide.matches && !book.matches;
+      story.classList.toggle('is-story', room);
+      pinned = room && fits();
       story.classList.toggle('is-story', pinned);
       show.setAttribute('aria-orientation', pinned ? 'vertical' : 'horizontal');
       if (pinned) place();
@@ -78,6 +81,7 @@ if (show) {
       sizing = requestAnimationFrame(setMode);
     });
     wide.addEventListener('change', setMode);
+    book.addEventListener?.('change', setMode);
     document.fonts?.ready.then(setMode);
     setMode();
   }
