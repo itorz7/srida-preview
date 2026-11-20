@@ -1,4 +1,4 @@
-// /brand/: the copy buttons (a colour's hex, the font-family line).
+// /brand/: the copy buttons (a colour code, the font-family line, a company text) and the "download all" button.
 import { initSite } from './site.js';
 
 initSite();
@@ -32,3 +32,17 @@ document.addEventListener('click', async (e) => {
     btn.classList.remove('done');
   }, 1400);
 });
+
+// "Download all": the whole pack is too large to sit beside the page (25 MB a file), so its address is set in
+// data/products.json → settings.brandPackUrl. Until one is there the button says so and does nothing.
+const all = document.querySelector('[data-pack-all][aria-disabled]');
+if (all) {
+  fetch('/data/products.json').then((r) => r.json()).then(({ settings = {} }) => {
+    const url = String(settings.brandPackUrl || '').trim();
+    if (!/^https:\/\//i.test(url)) return;
+    all.href = url;
+    all.rel = 'noopener';
+    all.removeAttribute('aria-disabled');
+    all.querySelector('[data-wait]')?.remove();
+  }).catch(() => {});
+}

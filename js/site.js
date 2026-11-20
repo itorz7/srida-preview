@@ -223,7 +223,10 @@ export function initSite() {
 
   // pointer and scroll motion is an extra: it starts once the page is idle, and never under reduced motion
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const start = () => import('./fx.js').then((m) => m.initFx()).catch(() => {});
+    const start = () => {
+      import('./fx.js').then((m) => m.initFx()).catch(() => {});
+      import('./mascot.js').then((m) => m.initMascot()).catch(() => {}); // บักสีดา's clips: an extra as well
+    };
     if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1500 });
     else setTimeout(start, 300);
   }

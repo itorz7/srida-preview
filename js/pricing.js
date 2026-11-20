@@ -6,8 +6,8 @@ initSite();
 
 const DEFAULTS = { askLabel: 'สอบถามราคา', fromLabel: 'เริ่มต้น', draftLabel: '', showDraftLabel: false, ctaLabel: 'ปรึกษาฟรี', ctaUrl: '/#contact' };
 const list = document.querySelector('[data-pricing]');
-const icons = [...(document.getElementById('price-icons')?.content.querySelectorAll('[data-icon]') || [])];
-const icon = (name) => (icons.find((n) => n.dataset.icon === name) || icons.find((n) => n.dataset.icon === 'server')).firstElementChild.cloneNode(true);
+const tick = document.getElementById('price-icons')?.content.querySelector('[data-icon="check"]')?.firstElementChild; // the one icon a row uses
+const icon = () => tick.cloneNode(true);
 const safeUrl = (u) => (typeof u === 'string' && /^(https?:\/\/|mailto:|tel:|\/(?!\/))/i.test(u.trim()) ? u.trim() : '');
 
 function h(tag, attrs = {}, ...kids) {
@@ -28,8 +28,8 @@ function row(p, s) {
     : [h('p', { class: 'price-num price-num--ask' }, s.askLabel)];
   const more = p.more && safeUrl(p.more.url) && p.more.label ? h('a', { class: 'link', href: safeUrl(p.more.url) }, p.more.label) : null;
   return h('li', { class: 'price-row', 'data-id': p.id },
-    h('div', { class: 'price-what' }, h('span', { class: 'risk-ico', 'aria-hidden': 'true' }, icon(p.icon)), h('h2', { class: 'price-name' }, p.name), h('p', {}, p.desc || ''), more),
-    h('ul', { class: 'ticks price-points' }, (Array.isArray(p.points) ? p.points : []).filter(Boolean).map((t) => h('li', {}, icon('check'), String(t)))),
+    h('div', { class: 'price-what' }, h('h2', { class: 'price-name' }, p.name), h('p', {}, p.desc || ''), more),
+    h('ul', { class: 'ticks price-points' }, (Array.isArray(p.points) ? p.points : []).filter(Boolean).map((t) => h('li', {}, icon(), String(t)))),
     h('div', { class: 'price-cell' },
       s.showDraftLabel && s.draftLabel && !p.final && h('span', { class: 'price-draft', 'data-draft': true }, s.draftLabel),
       price,
@@ -37,7 +37,7 @@ function row(p, s) {
       h('a', { class: 'btn btn--flesh btn--s', href: safeUrl(s.ctaUrl) || '/#contact' }, s.ctaLabel)));
 }
 
-if (list && icons.length) {
+if (list && tick) {
   try {
     const res = await fetch('/data/pricing.json', { cache: 'no-cache' });
     if (res.ok) {

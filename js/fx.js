@@ -8,9 +8,9 @@ const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 // glossy surfaces that carry a rim light (styles.css draws it at --mx / --my)
-const RIM = '.rail a, .p-card, .steps4 li, .uses-grid li, .tool, .quiz, .vs, .risk-row, .price-row, .asset, .swatch, .type-card, .dont, .night, .feature-tile, .cta-band';
+const RIM = '.rail a, .bento-cell a, .p-card, .steps4 li, .uses-grid li, .ind > li, .quiz, .vs, .risk-row, .price-row, .asset, .swatch, .type-card, .dont, .feature-tile';
 // what rises into place when it scrolls into view
-const REVEAL = '.sec-head, .rule-head, .risk-row, .risk-next, .vs, .pdpa, .quiz, .ind > li, .steps4 li, .picker, .models, .posts li, .qa-list, .cta-band, .uses-grid li, .tool, .price-row, .leak, .asset, .swatch, .type-card, .dont, .rules, [data-featured] > .wrap, .p-grid, .refs, .mem, .line-mock, .try-body';
+const REVEAL = '.sec-head, .say, .rule-head, .risk-row, .risk-next, .vs, .memo, .quiz, .ind > li, .steps4 li, .posts li, .qa-list, .cta-band, .uses-grid li, .price-row, .asset, .swatch, .type-card, .dont, .rules, [data-featured] > .wrap, .p-grid, .refs, .line-mock';
 
 function rimLight() {
   addEventListener('pointermove', (e) => {
@@ -153,7 +153,6 @@ async function scrollMotion() {
     });
     each('.line-hero .stage', (s) => gsap.to(s, { y: 48, ease: 'none', scrollTrigger: { trigger: s, start: 'top 20%', end: 'bottom top', scrub: 0.6 } }));
     each('.feature-media img:not(.is-fallback)', (img) => gsap.fromTo(img, { yPercent: -5, scale: 1.1 }, { yPercent: 5, scale: 1.1, ease: 'none', scrollTrigger: { trigger: img.closest('.feature-tile'), start: 'top bottom', end: 'bottom top', scrub: 0.6 } }));
-    each('.cta-mascot', (m) => gsap.fromTo(m, { yPercent: 14 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: m.closest('.cta-band'), start: 'top bottom', end: 'bottom bottom', scrub: 0.6 } }));
     if (fine) {
       await load('/vendor/lenis.min.js');
       smooth(gsap, ScrollTrigger);

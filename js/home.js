@@ -87,21 +87,6 @@ if (show) {
   }
 }
 
-/* ---------- machine picker: a segmented control whose thumb slides to the chosen machine ---------- */
-const seg = document.querySelector('.seg');
-if (seg) {
-  const { tabs, select } = initTabs(seg, {
-    onSelect: (t, i) => {
-      seg.style.setProperty('--i', i);
-      settlePhrases(seg.parentElement);
-    },
-  });
-  // start on the visitor's likely machine: Mac browsers get the Mac commands
-  const isMac = /Macintosh|Mac OS X/.test(navigator.userAgent) && !/iPhone|iPad/.test(navigator.userAgent);
-  select(tabs.find((t) => t.dataset.machine === (isMac ? 'mac' : 'nvidia')) || tabs[0], { motion: false });
-  requestAnimationFrame(() => requestAnimationFrame(() => seg.classList.add('is-ready')));
-}
-
 /* ---------- top bar: mark the section in view ---------- */
 trackSections(new Map([...document.querySelectorAll('.nav a[href^="/#"]')].map((a) => [a.getAttribute('href').slice(2), a])));
 
