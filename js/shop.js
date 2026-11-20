@@ -114,12 +114,18 @@ export function actions(p, settings, { small = false, other }) {
 }
 
 // A product picture. A failed load is tried once more; after that, or when a product has no usable picture, the logo stands in.
-export function productImage(p, src, lazy = true) {
+export const CARD_SIZES = '(min-width: 1100px) 300px, (min-width: 640px) 46vw, 92vw';
+const WIDE_SIZES = '(min-width: 860px) 50vw, 100vw';
+export function productImage(p, src, lazy = true, sizes = src ? WIDE_SIZES : CARD_SIZES) {
   const url = safeUrl(src || p.image);
-  const img = el('img', { class: url ? null : 'is-fallback', src: url || LOGO, alt: p.imageAlt || p.name, loading: lazy && 'lazy', decoding: 'async', width: 1200, height: 1200 });
+  // imageSmall / imageFeaturedSmall: the same picture 800 px wide, for phones
+  const small = url ? safeUrl(src ? p.imageFeaturedSmall : p.imageSmall) : '';
+  const img = el('img', { class: url ? null : 'is-fallback', src: url || LOGO, srcset: small && `${small} 800w, ${url} 1600w`, sizes: small && sizes, alt: p.imageAlt || p.name, loading: lazy && 'lazy', decoding: 'async', width: 1200, height: 1200 });
   let retried = false;
   img.addEventListener('error', () => {
     if (img.classList.contains('is-fallback')) return;
+    img.removeAttribute('srcset');
+    img.removeAttribute('sizes');
     if (url && !retried) {
       retried = true;
       img.src = url + (url.includes('?') ? '&' : '?') + 'retry=1';

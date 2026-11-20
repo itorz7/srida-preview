@@ -1,4 +1,4 @@
-// Shared behaviour for every page: top bar, mobile menu, tabs, copy buttons, the contact link.
+// Shared behaviour for every page: top bar, mobile menu, tabs, copy buttons, the contact link, and the late start of js/fx.js (motion).
 
 // A phrase kept whole (.ph) that is wider than its column would strand words on lines of their own.
 // Such a phrase is released to flow as normal text. Runs after text is drawn, when fonts arrive and on resize.
@@ -11,9 +11,10 @@ export function settlePhrases(root = document) {
 }
 
 // A tab list (role=tablist) with arrow keys, Home and End. The chosen panel gets .is-in so CSS can play its entrance.
+// onSelect also hears what chose the tab (by: 'click', 'key', or what the caller of select() passes).
 export function initTabs(list, { onSelect } = {}) {
   const tabs = [...list.querySelectorAll('[role="tab"]')];
-  function select(tab, { focus = false, motion = true } = {}) {
+  function select(tab, { focus = false, motion = true, by = '' } = {}) {
     tabs.forEach((t, i) => {
       const on = t === tab;
       t.setAttribute('aria-selected', String(on));
@@ -26,20 +27,24 @@ export function initTabs(list, { onSelect } = {}) {
           void panel.offsetWidth; // restart the entrance
           panel.classList.add('is-in');
         }
-        onSelect?.(t, i, panel, motion);
+        onSelect?.(t, i, panel, motion, by);
       }
     });
     if (focus) tab.focus({ preventScroll: true });
   }
   tabs.forEach((tab, i) => {
     tab.addEventListener('click', () => {
-      if (tab.getAttribute('aria-selected') !== 'true') select(tab);
+      if (tab.getAttribute('aria-selected') !== 'true') select(tab, { by: 'click' });
     });
     tab.addEventListener('keydown', (e) => {
-      const j = { ArrowRight: (i + 1) % tabs.length, ArrowLeft: (i - 1 + tabs.length) % tabs.length, Home: 0, End: tabs.length - 1 }[e.key];
+      const next = (i + 1) % tabs.length;
+      const prev = (i - 1 + tabs.length) % tabs.length;
+      // a list laid out as a column (aria-orientation="vertical") also takes the up and down arrows
+      const column = list.getAttribute('aria-orientation') === 'vertical' ? { ArrowDown: next, ArrowUp: prev } : {};
+      const j = { ArrowRight: next, ArrowLeft: prev, ...column, Home: 0, End: tabs.length - 1 }[e.key];
       if (j === undefined) return;
       e.preventDefault();
-      select(tabs[j], { focus: true });
+      select(tabs[j], { focus: true, by: 'key' });
     });
   });
   return { tabs, select };
@@ -138,6 +143,13 @@ export function initSite() {
   });
 
   wireContact();
+
+  // pointer and scroll motion is an extra: it starts once the page is idle, and never under reduced motion
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const start = () => import('./fx.js').then((m) => m.initFx()).catch(() => {});
+    if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1500 });
+    else setTimeout(start, 300);
+  }
 }
 
 // Mark the link whose section is in view (top-bar anchors on the home page, the contents list of an article).
