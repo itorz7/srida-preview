@@ -42,7 +42,8 @@ function anim(el, name, loop) { // Safari: an animated WebP over the still; "pla
   v.play = () => { v.paused = false; if (!v.src) v.src = `/assets/mascot/clip/baksida-${name}-anim.webp`; return Promise.resolve(); };
   v.pause = () => { v.paused = true; v.removeAttribute('src'); v.classList.remove('is-on'); if (loop) el.classList.remove('is-live'); };
   v.addEventListener('load', () => { if (v.paused) return; v.classList.add('is-on'); if (loop) el.classList.add('is-live'); if (!loop) v.dispatchEvent(new Event('playing')); });
-  v.addEventListener('error', () => { v.pause(); v.dispatchEvent(new Event('error')); });
+  let failing = false; // the error event is passed on to the hover handler below: not to this listener again
+  v.addEventListener('error', () => { if (failing) return; failing = true; v.pause(); v.dispatchEvent(new Event('error')); failing = false; });
   if (!loop) setTimeout(() => v.dispatchEvent(new Event('ended')), (FRAMES[name] || 7) * 1000 + 300);
   el.append(v);
   return v;
