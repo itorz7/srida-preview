@@ -207,7 +207,7 @@ main > .slab:not(.slab--top){margin-top:var(--section)}
 @media (hover:hover) and (pointer:fine){.bar > .wrap{background:linear-gradient(180deg,rgba(255,255,255,.86),rgba(255,251,247,.78));-webkit-backdrop-filter:saturate(160%) blur(18px);backdrop-filter:saturate(160%) blur(18px)}}
 .bar.is-stuck > .wrap,.bar:has(.nav.is-open) > .wrap{box-shadow:0 0 0 1px rgba(60,30,38,.09),0 20px 38px -20px rgba(72,30,44,.6)}
 .brand{display:block;flex:none}
-.brand img{width:auto;height:28px}
+.brand img{width:auto;height:26px}
 .nav{margin-left:auto}
 .nav ul{display:flex;gap:2px}
 .nav a{display:block;padding:7px 12px;border-radius:999px;font-size:.94rem;color:var(--ink-2);transition:color .2s,background-color .2s}
@@ -229,7 +229,7 @@ main > .slab:not(.slab--top){margin-top:var(--section)}
   .nav a[aria-current]{background:none;box-shadow:none;color:var(--flesh-ink)}
   .nav li:last-child a{border-bottom:0}
 }
-@container page (max-width:400px){.bar-cta{padding:0 12px;font-size:.84rem}.brand img{height:25px}}
+@container page (max-width:400px){.bar-cta{padding:0 12px;font-size:.84rem}.brand img{height:23px}}
 
 /* ---------- บักสีดา with nothing round her: the 3D mascot on a transparent background (the keyed first frame of her clip; no box, no backdrop).
    The picture is the first frame of a short loop; js/mascot.js lays the clip over it and fades it in once it plays. ---------- */
@@ -771,7 +771,7 @@ tbody th{font-weight:600}
 /* ---------- footer: the dark slab that closes the page ---------- */
 .foot{margin:var(--section) var(--inset) var(--inset);padding:clamp(40px,5cqi,72px) 0 calc(26px + env(safe-area-inset-bottom));font-size:.92rem;color:var(--ink-2)}
 .foot-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:36px 56px}
-.foot-brand img{width:auto;height:34px}
+.foot-brand img{width:auto;height:32px}
 .foot-brand p{max-width:24em;margin-top:14px;color:var(--ink-3)}
 .foot-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
 .foot-cols h2{font-size:.82rem;font-weight:600;color:var(--ink-3)}
