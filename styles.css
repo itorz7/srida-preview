@@ -34,7 +34,7 @@
   --inset:clamp(6px,.9cqi,12px);
   --bar-space:calc(78px + env(safe-area-inset-top,0px));
   --maxw:1200px;
-  --section:clamp(44px,5cqi,76px);
+  --section:clamp(40px,4.4cqi,66px);
   --ease:cubic-bezier(.23,1,.32,1);
   --ease-io:cubic-bezier(.77,0,.175,1);
   --ease-pop:cubic-bezier(.34,1.56,.64,1);
@@ -235,8 +235,11 @@ main > .slab:not(.slab--top){margin-top:var(--section)}
    The picture is the first frame of a short loop; js/mascot.js lays the clip over it and fades it in once it plays. ---------- */
 .disc{position:relative;isolation:isolate;display:block;flex:none;aspect-ratio:1;transition:transform .55s var(--ease-pop)}
 .disc picture,.disc img,.disc video{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:contain}
-.disc video{z-index:1;opacity:0;pointer-events:none;transition:opacity .4s}
-.disc video.is-on{opacity:1}
+.disc video,.disc .anim{z-index:1;opacity:0;pointer-events:none}
+.disc video.is-on,.disc .anim.is-on{opacity:1}
+.disc .hit{z-index:2}
+.disc.is-live picture{visibility:hidden}
+.disc.is-hover .loop{opacity:0}
 .disc[data-hover]{cursor:pointer}
 .stage{position:relative;display:grid;place-items:center;width:100%;max-width:420px;margin-inline:auto}
 .stage .disc{width:100%;animation:land .9s var(--ease-pop) both}
@@ -1241,7 +1244,7 @@ tbody th{font-weight:600}
 @media (hover:hover) and (pointer:fine){.fold-lines a:hover{background:rgba(255,255,255,.12)}}
 
 .is-off,.is-off *,.is-off::before,.is-off::after,.is-off *::before,.is-off *::after{animation-play-state:paused!important}
-@media (hover:none),(pointer:coarse){*,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}.bar>.wrap{background:linear-gradient(180deg,#22181c,#140c0f);transition:none}@keyframes resolve{from{opacity:0;transform:translateY(10px)}}.sec-head.rv>:first-child{clip-path:none;opacity:0}.sec-head.rv.is-in>:first-child{clip-path:none;opacity:1;transition:opacity .7s var(--ease),transform .9s var(--ease)}:root,.mock-win,.fc-in{--contact:0 1px 2px rgba(60,30,38,.08);--lift-1:0 16px 32px -18px rgba(72,30,44,.3);--lift-2:0 20px 40px -22px rgba(72,30,44,.34);--night-shadow:0 26px 44px -26px rgba(18,10,13,.6);--ghost-sh:inset 0 1px 0 #fff,0 0 0 1px rgba(60,30,38,.09),0 8px 16px -10px rgba(72,30,44,.32);--flesh-sh:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(90,10,30,.5),0 10px 22px -10px rgba(196,40,79,.75)}.dark,.night,.feature-tile,.cta-band,.bar{--lift-1:0 20px 36px -22px rgba(0,0,0,.7);--lift-2:0 22px 40px -24px rgba(0,0,0,.75)}.dark{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 0 0 1px rgba(255,255,255,.055),0 30px 40px -30px rgba(70,20,40,.55)}@container page (max-width:980px){.nav{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 0 0 1px rgba(255,255,255,.07),0 24px 40px -20px rgba(0,0,0,.8)}}.plinth{box-shadow:inset 0 2px 1px #fff,inset 0 -7px 14px -7px rgba(240,100,126,.55),0 10px 0 -1px #e59fae,0 28px 36px -16px rgba(120,30,55,.45)}.dark .plinth{box-shadow:inset 0 2px 1px rgba(255,255,255,.36),inset 0 -8px 16px -8px rgba(240,100,126,.75),0 10px 0 -1px rgba(240,100,126,.55),0 30px 40px -14px rgba(0,0,0,.8)}.fc-in{box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgba(255,255,255,.5),0 1.2em 2.4em -1em rgba(0,0,0,.7)}.fc--lock .fc-in{box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 0 0 1px rgba(140,198,63,.42),0 1.2em 2.4em -1em rgba(0,0,0,.8)}.show-tab[aria-selected="true"]{box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgba(60,30,38,.06),0 8px 16px -8px rgba(72,30,44,.3)}}
+@media (hover:none),(pointer:coarse){*,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}.bar>.wrap{background:#fffbf7;transition:none}@keyframes resolve{from{opacity:0;transform:translateY(10px)}}.sec-head.rv>:first-child{clip-path:none;opacity:0}.sec-head.rv.is-in>:first-child{clip-path:none;opacity:1;transition:opacity .7s var(--ease),transform .9s var(--ease)}:root,.mock-win,.fc-in{--contact:0 1px 2px rgba(60,30,38,.08);--lift-1:0 16px 32px -18px rgba(72,30,44,.3);--lift-2:0 20px 40px -22px rgba(72,30,44,.34);--night-shadow:0 26px 44px -26px rgba(18,10,13,.6);--ghost-sh:inset 0 1px 0 #fff,0 0 0 1px rgba(60,30,38,.09),0 8px 16px -10px rgba(72,30,44,.32);--flesh-sh:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(90,10,30,.5),0 10px 22px -10px rgba(196,40,79,.75)}.dark,.night,.feature-tile,.cta-band,.bar{--lift-1:0 20px 36px -22px rgba(0,0,0,.7);--lift-2:0 22px 40px -24px rgba(0,0,0,.75)}.dark{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 0 0 1px rgba(255,255,255,.055),0 30px 40px -30px rgba(70,20,40,.55)}@container page (max-width:980px){.nav{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 0 0 1px rgba(255,255,255,.07),0 24px 40px -20px rgba(0,0,0,.8)}}.fc-in{box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgba(255,255,255,.5),0 1.2em 2.4em -1em rgba(0,0,0,.7)}.fc--lock .fc-in{box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 0 0 1px rgba(140,198,63,.42),0 1.2em 2.4em -1em rgba(0,0,0,.8)}.show-tab[aria-selected="true"]{box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgba(60,30,38,.06),0 8px 16px -8px rgba(72,30,44,.3)}}
 .pack .btn--s{white-space:nowrap;padding:0 14px}
 .art-foot a{display:inline-flex;align-items:center;min-height:28px}
 .get-all-note{margin-top:30px}
@@ -1251,3 +1254,38 @@ tbody th{font-weight:600}
 @container page (max-width:560px){.pack-grid{grid-template-columns:minmax(0,400px);justify-content:center}}
 @container page (max-width:640px){#shop .p-card:nth-child(n+2){display:none}}
 @container page (max-width:640px){.sec{padding-top:38px}}
+/* the still behind a clip shows nothing (no alt text, no broken-picture frame) until it has loaded */
+/* while a still loads it shows no alt text or broken-picture mark; the picture itself is never hidden (it is the LCP) */
+.disc picture img{color:transparent;font-size:0}
+/* bento text: the meaning chip stays on one line, the description keeps clear of the picture */
+.bento-txt{max-width:none}
+.bento-txt .mean{white-space:nowrap;font-size:.76rem;padding:.15em .65em;max-width:100%}
+.bento-txt .bento-name{max-width:56%;padding-bottom:4px}
+/* bento (final): every cell is a grid, text | picture, so the text cannot run into her; one column on a phone */
+.bento-cell a{display:grid;grid-template-columns:minmax(0,1fr) var(--pw,112px);align-items:end;gap:6px 10px;padding:20px 18px 18px}
+.bento-cell .bento-txt{grid-column:1;grid-row:1;align-self:start;max-width:none}
+.bento-cell .bento-txt .bento-name{max-width:none;padding-bottom:0}
+.bento-cell .bento-pic,.bento-cell--llm .bento-pic,.bento-cell:not(.bento-cell--llm) .bento-pic{position:static;grid-column:2;grid-row:1;align-self:end;justify-self:end;width:100%;max-width:none;right:auto;bottom:auto;margin:0 0 -2px}
+.bento-cell--llm a{--pw:clamp(180px,40%,300px);padding:26px 26px 22px}
+.bento-cell .bento-txt b{padding-right:30px}
+@container page (max-width:980px){.bento-cell a{--pw:104px}.bento-cell--llm a{--pw:clamp(130px,36%,200px)}}
+@container page (max-width:560px){
+  .bento{grid-template-columns:minmax(0,1fr);grid-auto-rows:auto}
+  .bento-cell--llm{grid-column:auto}
+  .bento-cell a{--pw:92px;min-height:0}
+  .bento-cell--llm a{--pw:130px}
+}
+/* in the 2- and 4-column bento the text takes the full cell width and the picture sits under it, bottom right */
+@container page (min-width:561px){
+  .bento-cell:not(.bento-cell--llm) a{grid-template-columns:minmax(0,1fr);--pw:96px}
+  .bento-cell:not(.bento-cell--llm) .bento-txt{grid-column:1}
+  .bento-cell:not(.bento-cell--llm) .bento-pic{grid-column:1;grid-row:2;width:var(--pw)}
+}
+@container page (max-width:560px){.bento-cell--llm a{--pw:104px}}
+@container page (max-width:560px){
+  .sec{padding-top:32px}
+  .bento{gap:8px}
+  .bento-cell a{--pw:80px;padding:14px 14px 12px}
+  .bento-cell--llm a{--pw:96px;padding:16px 14px 14px}
+}
+@container page (max-width:380px){.bento-cell--llm a{--pw:80px}}

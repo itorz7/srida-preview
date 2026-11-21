@@ -2,17 +2,20 @@
 // An extra, loaded at idle by site.js and never under reduced motion or Save-Data: without it the page shows the stills.
 // Only a clip that is on screen plays; on a touch screen one clip plays at a time (the one nearest the middle of the screen);
 // everything stops while the tab is hidden. data-hover names a clip that plays once on hover (mouse) or tap (touch).
-// The clips are WebM (VP9) with a transparent background: Chrome, Edge, Firefox and Android play them with alpha. Safari and
-// iPhone do not show WebM alpha, so they keep the transparent still (no canvas or WebGL keying: that would make a phone lag).
-const SAFARI = /^((?!chrome|chromium|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent);
-const CAN_ALPHA = !SAFARI && !!document.createElement('video').canPlayType('video/webm; codecs="vp9"');
+// Chrome, Edge, Firefox and Android play WebM (VP9) clips with a transparent background. Safari and every browser on iPhone
+// cannot show WebM alpha, so they get the same pose as an animated WebP with alpha, laid over her still the same way (no canvas, no WebGL).
+// Only one layer of her is ever visible: the still goes the moment the first frame of a clip is up, and comes back if the clip fails.
+const SAFARI = /^((?!chrome|chromium|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent) || /iphone|ipad|ipod/i.test(navigator.userAgent);
+const CAN_VP9 = !!document.createElement('video').canPlayType('video/webm; codecs="vp9"');
 const FINE = matchMedia('(hover: hover) and (pointer: fine)').matches;
 const file = (name, el) => `/assets/mascot/clip/baksida-${name}-${el.clientWidth * Math.min(window.devicePixelRatio || 1, 2) > 520 ? 720 : 480}.webm`;
 const seen = new Map(); // disc → share of it on screen
 const clips = new WeakMap(); // disc → its looping <video>
 
-function video(el, name, loop) {
+function layer(el, name, loop) {
+  if (SAFARI) return anim(el, name, loop);
   const v = document.createElement('video');
+  v.className = loop ? 'loop' : 'hit';
   v.muted = true;
   v.defaultMuted = true;
   v.loop = loop;
@@ -21,8 +24,26 @@ function video(el, name, loop) {
   v.disablePictureInPicture = true;
   v.tabIndex = -1;
   v.setAttribute('aria-hidden', 'true');
-  v.addEventListener('playing', () => v.classList.add('is-on'));
+  v.addEventListener('playing', () => { v.classList.add('is-on'); if (loop) el.classList.add('is-live'); });
+  if (loop) v.addEventListener('error', () => { v.remove(); clips.delete(el); el.classList.remove('is-live'); });
   v.src = file(name, el);
+  el.append(v);
+  return v;
+}
+
+const FRAMES = { idle: 7.6, wave: 7.6, llm: 7.6, asr: 7.6, tts: 7.6, mt: 3.3, vision: 7.6 };
+function anim(el, name, loop) { // Safari: an animated WebP over the still; "playing" = loaded, "paused" = removed
+  const v = document.createElement('img');
+  v.className = (loop ? 'loop' : 'hit') + ' anim';
+  v.alt = '';
+  v.decoding = 'async';
+  v.setAttribute('aria-hidden', 'true');
+  v.paused = true;
+  v.play = () => { v.paused = false; if (!v.src) v.src = `/assets/mascot/clip/baksida-${name}-anim.webp`; return Promise.resolve(); };
+  v.pause = () => { v.paused = true; v.removeAttribute('src'); v.classList.remove('is-on'); if (loop) el.classList.remove('is-live'); };
+  v.addEventListener('load', () => { if (v.paused) return; v.classList.add('is-on'); if (loop) el.classList.add('is-live'); if (!loop) v.dispatchEvent(new Event('playing')); });
+  v.addEventListener('error', () => { v.pause(); v.dispatchEvent(new Event('error')); });
+  if (!loop) setTimeout(() => v.dispatchEvent(new Event('ended')), (FRAMES[name] || 7) * 1000 + 300);
   el.append(v);
   return v;
 }
@@ -39,7 +60,7 @@ function update() {
     const want = !document.hidden && play.includes(el) && !el.dataset.busy;
     let v = clips.get(el);
     if (want) {
-      if (!v) clips.set(el, (v = video(el, el.dataset.clip, true)));
+      if (!v) clips.set(el, (v = layer(el, el.dataset.clip, true)));
       if (v.paused) v.play().catch(() => {});
     } else if (v && !v.paused) v.pause();
   }
@@ -48,22 +69,22 @@ function update() {
 function once(el) { // the hover / tap clip: played once over the loop, then the loop shows again
   if (el.dataset.busy) return;
   el.dataset.busy = '1';
-  const v = video(el, el.dataset.hover, false);
+  const v = layer(el, el.dataset.hover, false);
+  v.addEventListener('playing', () => { el.classList.add('is-hover'); clips.get(el)?.pause?.(); });
   const done = () => {
     if (!el.dataset.busy) return;
     delete el.dataset.busy;
-    v.classList.remove('is-on');
-    setTimeout(() => v.remove(), 450);
+    el.classList.remove('is-hover');
+    v.remove();
     update();
   };
   v.addEventListener('ended', done);
   v.addEventListener('error', done);
   v.play().catch(done);
-  if (!FINE) update(); // a phone decodes one clip at a time: the loop under it waits
 }
 
 export function initMascot() {
-  if (!CAN_ALPHA || matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData || !('IntersectionObserver' in window)) return;
+  if (!(SAFARI || CAN_VP9) || matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData || !('IntersectionObserver' in window)) return;
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) seen.set(e.target, e.isIntersecting ? e.intersectionRatio : 0);
     update();
@@ -82,3 +103,4 @@ export function initMascot() {
   const away = new IntersectionObserver((entries) => entries.forEach((e) => e.target.classList.toggle('is-away', !e.isIntersecting)));
   document.querySelectorAll('.scene, .mock, .bento').forEach((el) => away.observe(el));
 }
+
