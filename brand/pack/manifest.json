@@ -1,12 +1,50 @@
 {
  "brand": "Srida.ai",
  "tagline": "ผู้นำด้าน Local AI ในประเทศไทย",
- "generated": "2026-11-20",
+ "generated": "2026-11-21",
  "contact_sheet": "contact-sheet.png",
  "all_assets": {
-  "zip": "all-assets.zip",
-  "zip_bytes": 68041575,
-  "sha256": "33990fc6511624a74375bf0a681b961eb2f6620d492ac8be5586b2d5b4dbef5c"
+  "zip": "srida-brand-kit-1-of-3.zip",
+  "zip_bytes": 24941534,
+  "sha256": "66a9249e8f2ae00fe82447f3e68badb7b28ef32cb3bb8ce8be1bf58f3465fd76",
+  "total_bytes": 68044081,
+  "description_th": "ชุดแบรนด์รวมมี ZIP 3 ไฟล์ แตกทั้ง 3 ไฟล์ลงในโฟลเดอร์เดียวกันเพื่อรับไฟล์ครบทั้ง 11 ชุด",
+  "description_en": "The complete brand kit comes in 3 ZIP files. Extract all 3 into the same folder to get all 11 asset sets.",
+  "readme": "README.txt",
+  "parts": [
+   {
+    "zip": "srida-brand-kit-1-of-3.zip",
+    "zip_bytes": 24941534,
+    "sha256": "66a9249e8f2ae00fe82447f3e68badb7b28ef32cb3bb8ce8be1bf58f3465fd76",
+    "set_ids": [
+     "02-wordmark",
+     "05-app-icon",
+     "06-mascot",
+     "08-colors"
+    ]
+   },
+   {
+    "zip": "srida-brand-kit-2-of-3.zip",
+    "zip_bytes": 24751874,
+    "sha256": "f7f4fb282afbc8a13581da6f716ed202f39a91275b2e178b6b869d3e17f90774",
+    "set_ids": [
+     "03-lockup-thai",
+     "04-sub-brands",
+     "09-fonts",
+     "11-templates"
+    ]
+   },
+   {
+    "zip": "srida-brand-kit-3-of-3.zip",
+    "zip_bytes": 18350673,
+    "sha256": "b7228a49f8ce7f3d718f04904eed9f1d3508951f9f1e110ccf1b180813a09b49",
+    "set_ids": [
+     "01-logo-mark",
+     "07-social",
+     "10-documents"
+    ]
+   }
+  ]
  },
  "sets": [
   {
@@ -18,8 +56,8 @@
    "description_en": "The halved guava icon for tight spaces: avatars, favicons, stamps.",
    "usage_th": "Logo mark — ไอคอนฝรั่ง\nแต่ละแบบมี SVG, PDF (เวกเตอร์สำหรับพิมพ์), PNG พื้นหลังโปร่งใส ขนาด 512/1024/2048 px\n- srida-mark-color: สี ใช้ตั้งแต่ 48 px ขึ้นไป (มีเมล็ดและเส้นใบ)\n- srida-mark-color-small: ใช้ 16–32 px (ตัดเมล็ด เปลือกและก้านหนาขึ้น)\n- srida-mark-black / -white: สีเดียว สำหรับพิมพ์สีเดียว แกะสลัก ปั๊ม หรือวางบนพื้นเข้ม\nเว้นที่ว่างรอบโลโก้อย่างน้อยเท่าความสูงของตัว s · ห้ามยืด หมุน เปลี่ยนสี หรือใส่เงา\nไฟล์ -white และ -on-dark ใน PDF มีพื้นหมึก (#0B0B0C) รองไว้ เพราะ PDF ไม่มีพื้นโปร่งใสให้เห็นตัวอักษรขาว · PNG ทุกไฟล์พื้นโปร่งใส · SVG ตัวอักษรเป็นเส้น (outline) เปิดได้โดยไม่ต้องมีฟอนต์",
    "zip": "srida-logo-mark.zip",
-   "zip_bytes": 700311,
-   "sha256": "b7caf34df9a7cb1848c6f49c6761d3d9b1cbcc5bae92b8bc41f635320334a6bf",
+   "zip_bytes": 700309,
+   "sha256": "2a8c2ff955673c8aa4a05e50e5b15e41b0ca2eb0669e12275b2ae2f38e7e8f74",
    "preview": "previews/01-logo-mark.png",
    "file_count": 21,
    "files": [
@@ -142,8 +180,8 @@
    "description_en": "The primary srida.ai wordmark (guava as the i-dot) in four colourways.",
    "usage_th": "Wordmark srida.ai — โลโก้หลัก\n- color: บนพื้นขาวหรือสีอ่อน · on-dark: บนพื้นเข้ม · black: ดำล้วน · white: ขาวล้วนบนพื้นเข้ม\nกว้างไม่ต่ำกว่า 96 px ถ้าเล็กกว่านั้นให้ใช้ไอคอน · เว้นที่ว่างรอบโลโก้อย่างน้อยเท่าความสูงของตัว s\nไฟล์ -white และ -on-dark ใน PDF มีพื้นหมึก (#0B0B0C) รองไว้ เพราะ PDF ไม่มีพื้นโปร่งใสให้เห็นตัวอักษรขาว · PNG ทุกไฟล์พื้นโปร่งใส · SVG ตัวอักษรเป็นเส้น (outline) เปิดได้โดยไม่ต้องมีฟอนต์",
    "zip": "srida-wordmark.zip",
-   "zip_bytes": 403213,
-   "sha256": "5165d2ce5b0f8451cdeda48fc1146c96464c5e20264f4c746b61d136021fca95",
+   "zip_bytes": 403214,
+   "sha256": "23fcbcd214bf24f4f51563feef07169f3a186a95a0c28f962a81a8b34ca21cff",
    "preview": "previews/02-wordmark.png",
    "file_count": 21,
    "files": [
@@ -266,8 +304,8 @@
    "description_en": "Logo paired with the Thai name สีดา, horizontal and stacked, four colourways.",
    "usage_th": "Lockup คู่ชื่อไทย \"สีดา\"\n- horizontal (แนวนอน) ใช้บนหัวเว็บ หัวเอกสาร · stacked (แนวตั้ง) เหมาะสำหรับพื้นที่สี่เหลี่ยม\n- 4 แบบสี: color, on-dark, black, white\nตัวอักษรไทยคือ Prompt Bold (OFL) แปลงเป็นเส้นแล้ว\nไฟล์ -white และ -on-dark ใน PDF มีพื้นหมึก (#0B0B0C) รองไว้ เพราะ PDF ไม่มีพื้นโปร่งใสให้เห็นตัวอักษรขาว · PNG ทุกไฟล์พื้นโปร่งใส · SVG ตัวอักษรเป็นเส้น (outline) เปิดได้โดยไม่ต้องมีฟอนต์",
    "zip": "srida-lockup-thai.zip",
-   "zip_bytes": 819525,
-   "sha256": "f83215e2062afb1de9ca1b8f19c0747a0c1982a14a6d7e01e4d79b69e8cddf2e",
+   "zip_bytes": 819526,
+   "sha256": "4a00f79b50f6edfc831ec24459be0461769660e53ee51fb6bf8871979f58c9cc",
    "preview": "previews/03-lockup-thai.png",
    "file_count": 41,
    "files": [
@@ -494,8 +532,8 @@
    "description_en": "Product lockups for Srida Khuet / Yin / Wao / Khua / Berng with each product's mascot pose.",
    "usage_th": "ผลิตภัณฑ์ 5 สาย\nSrida Khuet — คึด (คิด) · LLM · ท่าบักสีดา: llm\nSrida Yin — ยิน (ได้ยิน) · ASR (ถอดเสียง) · ท่า: asr\nSrida Wao — เว้า (พูด) · TTS (สร้างเสียง) · ท่า: tts\nSrida Khua — ขัว (สะพาน) · MT (แปลภาษา) · ท่า: mt\nSrida Berng — เบิ่ง (ดู) · Vision · ท่า: vision\nโลโก้ผลิตภัณฑ์ใช้โครงเดียวกับ wordmark (Outfit) ชื่อสินค้าสีชมพู มีบรรทัดเล็กบอกคำอีสาน (คำไทยกลาง) และชนิดสินค้า · ในโฟลเดอร์ png/<สินค้า>/ มี mascot-<ท่า>-1024/2048.png ท่าประจำสินค้าด้วย\nไฟล์ -white และ -on-dark ใน PDF มีพื้นหมึก (#0B0B0C) รองไว้ เพราะ PDF ไม่มีพื้นโปร่งใสให้เห็นตัวอักษรขาว · PNG ทุกไฟล์พื้นโปร่งใส · SVG ตัวอักษรเป็นเส้น (outline) เปิดได้โดยไม่ต้องมีฟอนต์",
    "zip": "srida-sub-brands.zip",
-   "zip_bytes": 16658437,
-   "sha256": "91fd5f888b743870e914cc370f4d24f1a6fb71a7b3c8fb9105ba346b98b4ed44",
+   "zip_bytes": 16658434,
+   "sha256": "08cc1cf6318c1266da7de428eba75034a3a08082ff1383db738a5fd44e8a9b59",
    "preview": "previews/04-sub-brands.png",
    "file_count": 111,
    "files": [
@@ -1095,7 +1133,7 @@
    "usage_th": "App icon & favicon\n- favicon.ico (16/32/48) · favicon.svg (ไอคอนฝรั่งแบบเล็ก) · png/favicon-16/32/48\n- png/apple-touch-icon-180.png (พื้นขาวเต็มสี่เหลี่ยม ระบบ iOS จะมนมุมให้อัตโนมัติ)\n- png/icon-192, icon-512 (แผ่นขาวมนมุม) · png/icon-maskable-512.png (ไอคอนอยู่ในโซนปลอดภัย 80% ของวงกลม)\n- png/app-icon-white-1024.png, app-icon-ink-1024.png: ส่งขึ้น App Store / Play Store\n- site.webmanifest และ head-snippet.html เป็นตัวอย่าง: ปรับ path ให้ตรงกับเว็บ\n",
    "zip": "srida-app-icon.zip",
    "zip_bytes": 155240,
-   "sha256": "b84fb7c71c82ca3d2dc6b06c319ed5ebeacf20ffac992382703394198f5989f5",
+   "sha256": "7f21dfd9393cda4365717a74696c88c13f95c9321787c813e0fb2a2863da1fec",
    "preview": "previews/05-app-icon.png",
    "file_count": 14,
    "files": [
@@ -1182,16 +1220,16 @@
    "name_en": "Mascot \"Baksida\"",
    "description_th": "มาสคอตบักสีดาครบทั้ง 9 ท่า ไฟล์ PNG พื้นหลังโปร่งใส ขนาด 1024 และ 2048 px พร้อมแนวทางการใช้งาน",
    "description_en": "Baksida, all 9 poses as transparent PNG at 1024 and 2048, with usage rules.",
-   "usage_th": "บักสีดา — มาสคอต\n\"บักสีดา\" คือฝรั่ง (ภาษาอีสาน) ผ่าซีก สวมชฎาทองของนางสีดา ภาพทุกท่าเป็นภาพ 3D จริง ตัดพื้นหลังแล้ว\nท่า: front = ด้านหน้า (ท่ายืนหลัก) · three-quarter = มุม 3/4 (ท่ายืนหลัก) · back = ด้านหลัง · wave = โบกมือทักทาย · llm = คิดและคุย (Srida Khuet · LLM) · asr = ฟัง (Srida Yin · ASR) · tts = พูด (Srida Wao · TTS) · mt = แปลภาษา (Srida Khua · MT) · vision = มองภาพ (Srida Berng · Vision)\nไฟล์ 2048 ได้จากภาพต้นฉบับ 4096 ย่อลง ไม่ได้ขยายจากไฟล์เล็ก · ตัวละครอยู่กลางภาพ เว้นขอบโปร่งใสโดยรอบ\n\nกติกา\n- ใช้ไฟล์ตามที่จัดเตรียมไว้ ไม่วาดใหม่ ไม่ยืดหรือบีบ ไม่กลับซ้ายขวา ไม่เปลี่ยนสี และไม่ถอดชฎาหรือใบ\n- วางบนพื้นเรียบ (ขาว ครีม ชมพูอ่อน หมึก) ไม่วางบนลายหรือภาพรก\n- ท่าประจำสินค้าใช้คู่กับสินค้านั้น: llm=Khuet · asr=Yin · tts=Wao · mt=Khua · vision=Berng\n- เอกสารทางการใช้โลโก้ ไม่ใช้มาสคอตแทนโลโก้",
+   "usage_th": "บักสีดา — มาสคอต\n\"บักสีดา\" คือฝรั่ง (ภาษาอีสาน) ผ่าซีก สวมชฎาทองของนางสีดา ภาพทุกท่าเป็นภาพ 3D จริง ตัดพื้นหลังแล้ว\nท่า: front = ด้านหน้า (ท่ายืนหลัก) · three-quarter = มุม 3/4 (ท่ายืนหลัก) · back = ด้านหลัง · wave = โบกมือทักทาย · llm = คิดและคุย (Srida Khuet · LLM) · asr = ฟัง (Srida Yin · ASR) · tts = พูด (Srida Wao · TTS) · mt = แปลภาษา (Srida Khua · MT) · vision = มองภาพ (Srida Berng · Vision)\nไฟล์ 2048 ได้จากภาพต้นฉบับ 4096 ย่อลง ไม่ได้ขยายจากไฟล์เล็ก · ตัวละครอยู่กลางภาพ เว้นขอบโปร่งใสโดยรอบ\n\nกติกา\n- ใช้ไฟล์ตามที่จัดเตรียมไว้ ไม่วาดใหม่ ไม่ยืดหรือบีบ ไม่กลับซ้ายขวา ไม่เปลี่ยนสี และไม่ถอดชฎาหรือใบ\n- วางบนพื้นเรียบ (ขาว ครีม ชมพูอ่อน หมึก) ไม่วางบนลวดลายหรือภาพรกตา\n- ท่าประจำสินค้าใช้คู่กับสินค้านั้น: llm=Khuet · asr=Yin · tts=Wao · mt=Khua · vision=Berng\n- เอกสารทางการใช้โลโก้ ไม่ใช้มาสคอตแทนโลโก้",
    "zip": "srida-mascot.zip",
-   "zip_bytes": 24376114,
-   "sha256": "1faa81edddd8e3a3d88a45bbdb2c3b8b39f14c4108df3056823a4266f5e7758e",
+   "zip_bytes": 24376120,
+   "sha256": "ce6611085968b794ca8b33f8587f7bff70ec272f390e02a9fbaf0266aa82a914",
    "preview": "previews/06-mascot.png",
    "file_count": 19,
    "files": [
     {
      "path": "README.txt",
-     "bytes": 2061
+     "bytes": 2076
     },
     {
      "path": "png/baksida-asr-1024.png",
@@ -1310,16 +1348,16 @@
    "name_en": "Social media",
    "description_th": "โปรไฟล์วงกลม ปก Facebook, LINE OA, YouTube, X และภาพแชร์ OG — ใช้ภาพบักสีดา 3D จริงกับโลโก้",
    "description_en": "Profile image and covers for Facebook, LINE OA, YouTube, X and OG share image, built from the real 3D mascot and logo.",
-   "usage_th": "ภาพโซเชียล (สร้างจากภาพบักสีดา 3D จริง + โลโก้ + พื้นสีเรียบ ไม่มีลายหรือภาพวาด)\n- profile-*-1024.png: ภาพโปรไฟล์ สี่เหลี่ยมจัตุรัส ตัวภาพอยู่ในวงกลมปลอดภัย 80% (Facebook, LINE, YouTube, X ครอปเป็นวงกลมได้)\n- fb-cover-1640x624-v3.png: ปก Facebook ไม่มีลาย เนื้อหาอยู่ใน x 390–1239 ข้อความอยู่เหนือ y 280 เว้นโซนวงกลมโปรไฟล์กลางล่าง (ตัวเลขปลอดภัยมือถือจาก kit/build_kit.py ของ super1)\n- line-oa-cover-1080x878.png: LINE OA\n- youtube-banner-2560x1440.png: เนื้อหาทั้งหมดอยู่ใน safe area 1546x423 กลางภาพ (เห็นได้ทุกอุปกรณ์)\n- x-header-1500x500.png: X (Twitter) · og-image-1200x630.png: ภาพแชร์ลิงก์ (Open Graph)\nสามารถนำไปอัปโหลดตามขนาดที่ระบุไว้ได้ทันที โดยไม่ต้องย่อหรือขยาย",
+   "usage_th": "ภาพโซเชียล (สร้างจากภาพบักสีดา 3D จริง + โลโก้ + พื้นสีเรียบ ไม่มีลายหรือภาพวาด)\n- profile-*-1024.png: ภาพโปรไฟล์ สี่เหลี่ยมจัตุรัส ตัวภาพอยู่ในวงกลมปลอดภัย 80% (Facebook, LINE, YouTube, X ครอปเป็นวงกลมได้)\n- fb-cover-1640x624-v3.png: ปก Facebook ไม่มีลาย เนื้อหาอยู่ใน x 390–1239 ข้อความอยู่เหนือ y 280 เว้นโซนวงกลมโปรไฟล์กลางล่าง (ระยะปลอดภัยสำหรับการแสดงผลบนมือถือ)\n- line-oa-cover-1080x878.png: LINE OA\n- youtube-banner-2560x1440.png: เนื้อหาทั้งหมดอยู่ใน safe area 1546x423 กลางภาพ (เห็นได้ทุกอุปกรณ์)\n- x-header-1500x500.png: X (Twitter) · og-image-1200x630.png: ภาพแชร์ลิงก์ (Open Graph)\nนำไปอัปโหลดตามขนาดที่ระบุไว้ได้ทันที โดยไม่ต้องย่อหรือขยาย",
    "zip": "srida-social.zip",
-   "zip_bytes": 2214343,
-   "sha256": "5d5a52b33442c7e236c42fc017692824f3a4ccecf1ced9643b0943a2a38fe87b",
+   "zip_bytes": 2214327,
+   "sha256": "10910825e1fac0c1c6d426a9e06df2ee30e50c6074e88717c9e70766f519b2d3",
    "preview": "previews/07-social.png",
    "file_count": 10,
    "files": [
     {
      "path": "README.txt",
-     "bytes": 1601
+     "bytes": 1585
     },
     {
      "path": "fb-cover-1640x624-v3.png",
@@ -1387,7 +1425,7 @@
    "usage_th": "สีแบรนด์ Srida.ai\nสี | HEX | RGB | HSL | OKLCH | CMYK (ประมาณ) | การใช้งาน\nชมพูเนื้อ (pink) | #F0647E | 240, 100, 126 | 349°, 82%, 67% | 0.685 0.173 11.5 | 0/58/48/6 | สีเน้นของแบรนด์\nเขียวใบ (leaf) | #3A9A40 | 58, 154, 64 | 124°, 45%, 42% | 0.609 0.156 144.4 | 62/0/58/40 | ใบ ก้าน สีเน้นรอง\nหมึก (ink) | #0B0B0C | 11, 11, 12 | 240°, 4%, 5% | 0.15 0.002 286.1 | 8/8/0/95 | ตัวอักษร พื้นเข้ม\nเทา (grey) | #9A9AA0 | 154, 154, 160 | 240°, 3%, 62% | 0.688 0.009 286.2 | 4/4/0/37 | \".ai\" เส้นคั่น\nเขียวเปลือก (rind) | #8CC63F | 140, 198, 63 | 86°, 54%, 51% | 0.76 0.174 129.8 | 29/0/68/22 | เปลือกฝรั่ง\nครีมเมล็ด (seed) | #FFE9C7 | 255, 233, 199 | 36°, 100%, 89% | 0.943 0.05 78.7 | 0/9/22/0 | เมล็ด\nครีมพื้น (cream) | #FFF6E9 | 255, 246, 233 | 35°, 100%, 96% | 0.977 0.02 77.3 | 0/4/9/0 | พื้นหลังอุ่น\nขาว (white) | #FFFFFF | 255, 255, 255 | 0°, 0%, 100% | 1.0 0.0 0 | 0/0/0/0 | พื้นหลังหลัก\nชมพูเข้ม (pink-text) | #C8355A | 200, 53, 90 | 345°, 58%, 50% | 0.561 0.183 10.9 | 0/74/55/22 | ลิงก์ ตัวอักษรชมพู\nเทาเข้ม (grey-text) | #6B6B72 | 107, 107, 114 | 240°, 3%, 43% | 0.53 0.011 286.0 | 6/6/0/55 | ตัวอักษรรอง\n\nไฟล์: srida-colors.css (CSS variables) · srida-colors.json · tailwind.snippet.js · figma-tokens.json (รูปแบบ Design Tokens ใช้กับ Tokens Studio ได้) · srida-colors.ase (Adobe Swatch ใช้ได้ใน Photoshop/Illustrator/InDesign)\nCMYK คือค่าแปลงโดยประมาณจาก RGB ก่อนพิมพ์จริงแนะนำให้พิมพ์ทดสอบเทียบสีกับโรงพิมพ์ · แบรนด์ไม่มีเบอร์สี Pantone",
    "zip": "srida-colors.zip",
    "zip_bytes": 4626,
-   "sha256": "e2696ffc577e53e17d32cc022277f6ad1e6c7a3b53c8a58406818bc2cf77141e",
+   "sha256": "176eb3a90da7a3a5455605865f8d921ddfff5e1475f68b1d0c0a41cc2cbd0c63",
    "preview": "previews/08-colors.png",
    "file_count": 6,
    "files": [
@@ -1427,7 +1465,7 @@
    "usage_th": "ฟอนต์แบรนด์\n- Outfit (ตัวอักษรละติน): Outfit-Variable.ttf ปรับน้ำหนักได้ 100–900 · wordmark ใช้น้ำหนัก 750\n- Prompt (ภาษาไทย): Regular / Medium / SemiBold / Bold\nทั้งสองฟอนต์ได้รับอนุญาตภายใต้ SIL Open Font License 1.1 สามารถใช้งานในเชิงพาณิชย์ได้ฟรี ฝังในเว็บ/แอป/เอกสารได้ ห้ามจำหน่ายไฟล์ฟอนต์เดี่ยว ๆ · ดูข้อความสัญญาอนุญาตฉบับเต็มได้ในโฟลเดอร์ licence/\nข้อความทั่วไปใช้ Outfit + Prompt · เอกสารทางการใช้ Prompt",
    "zip": "srida-fonts.zip",
    "zip_bytes": 348182,
-   "sha256": "9fde7d79ebac195bd97a37d2a1ddd9878d22ac268dc145e20443998a88994b14",
+   "sha256": "9ff014ddb1c52452f4d236a264df14a13af82cbd2c8751d7244c010065fa84f3",
    "preview": "previews/09-fonts.png",
    "file_count": 8,
    "files": [
@@ -1474,8 +1512,8 @@
    "description_en": "Brand guideline PDF, company boilerplate (short/long, TH/EN) and a name spelling/pronunciation guide.",
    "usage_th": "เอกสารแบรนด์\n- srida-brand-guideline.pdf: คู่มือแบรนด์ (โลโก้ สี ฟอนต์ มาสคอต และแนวทางการใช้งาน)\n- boilerplate/: ข้อความแนะนำบริษัท สั้นและยาว ทั้งภาษาไทยและอังกฤษ สำหรับใช้ในข่าวประชาสัมพันธ์ โปรไฟล์บริษัท และเอกสารทางการ\n- name-guide-th/en.txt: วิธีสะกดและออกเสียงชื่อ\nข้อความเขียนจากข้อมูลที่ยืนยันแล้วเท่านั้น (แท็กไลน์ ที่มาชื่อ สินค้า 5 สาย) ยังไม่มีปีก่อตั้ง ตัวเลข ลูกค้า หรือที่อยู่ หากมีข้อมูลจริงเพิ่มเติม กรุณาระบุให้ครบถ้วนก่อนนำไปเผยแพร่",
    "zip": "srida-documents.zip",
-   "zip_bytes": 15434183,
-   "sha256": "535ca212bec9ee1d15390d76a34fd43aba800f81df49651e560460920065b130",
+   "zip_bytes": 15434521,
+   "sha256": "b611f54bbc7557155fd6423cc4b35da59d74a2ed0870726f3a741b73a124202b",
    "preview": "previews/10-documents.png",
    "file_count": 8,
    "files": [
@@ -1509,7 +1547,7 @@
     },
     {
      "path": "srida-brand-guideline.pdf",
-     "bytes": 15610161
+     "bytes": 15610531
     }
    ]
   },
@@ -1522,8 +1560,8 @@
    "description_en": "Business card (90x55 mm), A4 letterhead, two 1920x1080 meeting backgrounds and an HTML email signature.",
    "usage_th": "เทมเพลต (ใช้ภาพบักสีดา 3D จริง + โลโก้ + พื้นสีเรียบ)\n- business-card-front/back-90x55mm.pdf: นามบัตร 90x55 มม. แยกไฟล์ละหน้า ช่องชื่อ/ตำแหน่ง/โทร/อีเมลด้านหลังนามบัตรเป็นข้อความตัวอย่าง สามารถแก้ไขได้ (ระยะเผื่อตัดตก: หากส่งโรงพิมพ์ ให้ขยายพื้นหลังออกไป 3 มม.)\n- letterhead-a4.pdf: หัวกระดาษ A4\n- meeting-background-light/dark-1920x1080.png: พื้นหลังประชุมออนไลน์ (Zoom/Meet/Teams) เว้นพื้นที่ตรงกลางภาพสำหรับผู้พูด\n- email-signature/: signature.html + srida-signature-logo.png\nข้อความตัวอย่างในเทมเพลต (ชื่อ นามสกุล ตำแหน่ง โทร อีเมล) กรุณาแทนที่ด้วยข้อมูลจริงก่อนนำไปใช้งาน",
    "zip": "srida-templates.zip",
-   "zip_bytes": 6919077,
-   "sha256": "be2ed00e8056cf30591379d1192f925f55a17454176f78d5c997efb6bc8b157a",
+   "zip_bytes": 6919078,
+   "sha256": "6efbcc2ba3a4b400a400ec27fabe9ae03db9e7b96764aeba664f2d6fe70c445f",
    "preview": "previews/11-templates.png",
    "file_count": 8,
    "files": [

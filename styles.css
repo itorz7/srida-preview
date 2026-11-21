@@ -1289,3 +1289,9 @@ tbody th{font-weight:600}
   .bento-cell--llm a{--pw:96px;padding:16px 14px 14px}
 }
 @container page (max-width:380px){.bento-cell--llm a{--pw:80px}}
+
+.get-all{margin-top:18px;max-width:46rem}
+.get-all .get-all-note{margin:0 0 10px;font-size:.92rem;color:var(--ink-2)}
+.get-all-row{display:flex;flex-wrap:wrap;gap:8px 10px}
+.get-all-row .btn{flex:0 1 auto}
+@container page (max-width:560px){.get-all-row .btn{flex:1 1 100%;justify-content:center}}
