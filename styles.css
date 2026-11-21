@@ -238,7 +238,7 @@ main > .slab:not(.slab--top){margin-top:var(--section)}
 .disc video,.disc .anim{z-index:1;opacity:0;pointer-events:none}
 .disc video.is-on,.disc .anim.is-on{opacity:1}
 .disc .hit{z-index:2}
-.disc.is-live picture{visibility:hidden}
+.disc.is-live picture,.disc.is-hover picture{visibility:hidden}
 .disc.is-hover .loop{opacity:0}
 .disc[data-hover]{cursor:pointer}
 .stage{position:relative;display:grid;place-items:center;width:100%;max-width:420px;margin-inline:auto}
@@ -1295,3 +1295,4 @@ tbody th{font-weight:600}
 .get-all-row{display:flex;flex-wrap:wrap;gap:8px 10px}
 .get-all-row .btn{flex:0 1 auto}
 @container page (max-width:560px){.get-all-row .btn{flex:1 1 100%;justify-content:center}}
+@container page (max-width:560px){.get-all-row .btn{min-height:44px}}

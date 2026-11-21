@@ -49,7 +49,7 @@ function anim(el, name, loop) { // Safari: an animated WebP over the still; "pla
 }
 
 function update() {
-  const on = [...seen].filter(([el, share]) => share >= 0.35 && el.isConnected).map(([el]) => el);
+  const on = [...seen].filter(([el, share]) => share >= (el.closest('.stage--hero') ? 0.2 : 0.35) && el.isConnected).map(([el]) => el);
   let play = on;
   if (!FINE && on.length > 1) {
     const mid = innerHeight / 2;
@@ -88,7 +88,7 @@ export function initMascot() {
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) seen.set(e.target, e.isIntersecting ? e.intersectionRatio : 0);
     update();
-  }, { threshold: [0, 0.35, 0.7] });
+  }, { threshold: [0, 0.2, 0.35, 0.7] });
   document.querySelectorAll('.disc[data-clip]').forEach((el) => {
     seen.set(el, 0);
     io.observe(el);
