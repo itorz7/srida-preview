@@ -31,6 +31,13 @@ function layer(el, name, loop) {
   return v;
 }
 
+// iPhone / iPad: a phone-sized animated WebP (160 / 240 / 360 px: the size shown x DPR 2, never more than 360). Desktop Safari keeps the 540 px file.
+const ANIM_SIZES = [160, 240, 360];
+const animFile = (name, el) => {
+  if (FINE) return `/assets/mascot/clip/baksida-${name}-anim.webp`;
+  const need = el.clientWidth * Math.min(window.devicePixelRatio || 1, 2) * 0.8;
+  return `/assets/mascot/clip/baksida-${name}-anim-${ANIM_SIZES.find((s) => s >= need) || 360}.webp`;
+};
 const FRAMES = { idle: 7.6, wave: 7.6, llm: 7.6, asr: 7.6, tts: 7.6, mt: 3.3, vision: 7.6 };
 function anim(el, name, loop) { // Safari: an animated WebP over the still; "playing" = loaded, "paused" = removed
   const v = document.createElement('img');
@@ -39,7 +46,7 @@ function anim(el, name, loop) { // Safari: an animated WebP over the still; "pla
   v.decoding = 'async';
   v.setAttribute('aria-hidden', 'true');
   v.paused = true;
-  v.play = () => { v.paused = false; if (!v.src) v.src = `/assets/mascot/clip/baksida-${name}-anim.webp`; return Promise.resolve(); };
+  v.play = () => { v.paused = false; if (!v.src) v.src = animFile(name, el); return Promise.resolve(); };
   v.pause = () => { v.paused = true; v.removeAttribute('src'); v.classList.remove('is-on'); if (loop) el.classList.remove('is-live'); };
   v.addEventListener('load', () => { if (v.paused) return; v.classList.add('is-on'); if (loop) el.classList.add('is-live'); if (!loop) v.dispatchEvent(new Event('playing')); });
   let failing = false; // the error event is passed on to the hover handler below: not to this listener again
