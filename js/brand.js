@@ -43,6 +43,6 @@ if (all) {
     all.href = url;
     all.rel = 'noopener';
     all.removeAttribute('aria-disabled');
-    all.querySelector('[data-wait]')?.remove();
+    document.querySelector('[data-wait]')?.remove();
   }).catch(() => {});
 }

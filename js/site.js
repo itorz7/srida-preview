@@ -131,6 +131,16 @@ function clearFold() {
   }
 }
 
+// Looping scenes (the hero mascot floating, its halo breathing, the drifting cards, a typing caret) stop while they are off
+// screen: a running animation makes the compositor draw a new frame every 1/60 s even where nobody can see it, and on a
+// phone those frames compete with the finger's scroll. styles.css pauses everything inside .is-off. (t-5342)
+const LOOPS = '.scene, .stage, .caret';
+function pauseOffscreen() {
+  if (!('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries) => entries.forEach((en) => en.target.classList.toggle('is-off', !en.isIntersecting)));
+  document.querySelectorAll(LOOPS).forEach((el) => { if (!el.parentElement?.closest(LOOPS)) io.observe(el); });
+}
+
 export function initSite() {
   const settle = () => {
     settlePhrases();
@@ -157,6 +167,8 @@ export function initSite() {
       again = requestAnimationFrame(clearFold);
     }).observe(main);
   }
+
+  pauseOffscreen();
 
   const bar = document.getElementById('bar');
   if (bar) {

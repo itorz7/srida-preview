@@ -2,8 +2,12 @@
 // An extra, loaded at idle by site.js and never under reduced motion or Save-Data: without it the page shows the stills.
 // Only a clip that is on screen plays; on a touch screen one clip plays at a time (the one nearest the middle of the screen);
 // everything stops while the tab is hidden. data-hover names a clip that plays once on hover (mouse) or tap (touch).
+// The clips are WebM (VP9) with a transparent background: Chrome, Edge, Firefox and Android play them with alpha. Safari and
+// iPhone do not show WebM alpha, so they keep the transparent still (no canvas or WebGL keying: that would make a phone lag).
+const SAFARI = /^((?!chrome|chromium|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent);
+const CAN_ALPHA = !SAFARI && !!document.createElement('video').canPlayType('video/webm; codecs="vp9"');
 const FINE = matchMedia('(hover: hover) and (pointer: fine)').matches;
-const file = (name, el) => `/assets/mascot/clip/baksida-${name}-${el.clientWidth * Math.min(window.devicePixelRatio || 1, 2) > 520 ? 720 : 480}.mp4`;
+const file = (name, el) => `/assets/mascot/clip/baksida-${name}-${el.clientWidth * Math.min(window.devicePixelRatio || 1, 2) > 520 ? 720 : 480}.webm`;
 const seen = new Map(); // disc → share of it on screen
 const clips = new WeakMap(); // disc → its looping <video>
 
@@ -59,7 +63,7 @@ function once(el) { // the hover / tap clip: played once over the loop, then the
 }
 
 export function initMascot() {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData || !('IntersectionObserver' in window)) return;
+  if (!CAN_ALPHA || matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData || !('IntersectionObserver' in window)) return;
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) seen.set(e.target, e.isIntersecting ? e.intersectionRatio : 0);
     update();

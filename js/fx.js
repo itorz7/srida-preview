@@ -146,11 +146,6 @@ async function scrollMotion() {
     const each = (sel, fn) => document.querySelectorAll(sel).forEach(fn);
     // every tween below starts from the resting pose at the top of the page, so nothing jumps when the library arrives
     each('.hero-bg', (bg) => gsap.to(bg, { y: 90, ease: 'none', scrollTrigger: { trigger: bg.parentElement, start: 'top top', end: 'bottom top', scrub: 0.6 } }));
-    each('.hero', (hero) => {
-      const st = () => ({ trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.6 });
-      hero.querySelectorAll('.fc').forEach((fc) => gsap.to(fc, { y: -130 * Number(fc.dataset.depth || 1), ease: 'none', scrollTrigger: st() }));
-      hero.querySelectorAll('.stage--hero').forEach((s) => gsap.to(s, { y: 64, ease: 'none', scrollTrigger: st() }));
-    });
     each('.line-hero .stage', (s) => gsap.to(s, { y: 48, ease: 'none', scrollTrigger: { trigger: s, start: 'top 20%', end: 'bottom top', scrub: 0.6 } }));
     each('.feature-media img:not(.is-fallback)', (img) => gsap.fromTo(img, { yPercent: -5, scale: 1.1 }, { yPercent: 5, scale: 1.1, ease: 'none', scrollTrigger: { trigger: img.closest('.feature-tile'), start: 'top bottom', end: 'bottom top', scrub: 0.6 } }));
     if (fine) {
