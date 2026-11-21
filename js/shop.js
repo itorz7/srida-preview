@@ -1,5 +1,5 @@
 // The shop: everything here is drawn from /data/products.json. Add, remove or edit a product in that file only.
-const LOGO = '/assets/logo.svg';
+const LOGO = '/assets/logo-224.webp';
 const DEFAULTS = {
   orderUrl: '',
   orderLabel: 'สั่งซื้อ / สอบถาม',
