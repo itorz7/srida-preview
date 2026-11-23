@@ -4,6 +4,8 @@ import { initSite, trackSections } from './site.js';
 initSite({ fx: false });
 trackSections(new Map([...document.querySelectorAll('.toc--side a[href^="#"]')].map((a) => [a.getAttribute('href').slice(1), a])));
 
+document.querySelectorAll('.code .copy').forEach((b) => (b.hidden = false)); // the copy buttons work with JavaScript only (site.js does the copying)
+
 const box = document.querySelector('[data-share]');
 if (box) {
   const copy = box.querySelector('[data-copy]'), native = box.querySelector('[data-native]'), live = box.querySelector('[data-live]');
