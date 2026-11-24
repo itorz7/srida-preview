@@ -19,7 +19,7 @@ const size = (el) => {
   const need = el.clientWidth * Math.min(window.devicePixelRatio || 1, 2) * (FINE ? 1 : 0.8);
   return SIZES.find((s) => s >= need) || SIZES[SIZES.length - 1];
 };
-const CLIPS = '/assets/mascot/clip/v2/baksida-'; // a new encode goes into a new folder: a clip's URL never changes content
+const CLIPS = '/assets/mascot/clip/v3/baksida-'; // a new encode goes into a new folder: a clip's URL never changes content
 const file = (name, el) => `${CLIPS}${name}-${size(el)}.webm`;
 const animFile = (name, el) => `${CLIPS}${name}-anim-${size(el)}.webp`;
 const seen = new Map(); // disc → share of it on screen
