@@ -228,7 +228,6 @@ export function initSite({ fx = true } = {}) {
     const ts = bar.querySelector('.theme-set'), tb = bar.querySelector('.theme-btn');
     if (ts && tb) {
       const root = document.documentElement, metas = document.querySelectorAll('meta[name=theme-color]'), cs = document.querySelector('meta[name=color-scheme]');
-      const NAME = { auto: 'ตามเครื่อง', light: 'สว่าง', dark: 'มืด' };
       const get = () => { try { const t = localStorage.theme; return t === 'light' || t === 'dark' ? t : 'auto'; } catch { return 'auto'; } };
       const show = (t) => {
         if (t === 'auto') root.removeAttribute('data-theme'); else root.dataset.theme = t;
@@ -236,8 +235,8 @@ export function initSite({ fx = true } = {}) {
         metas[0].content = t === 'dark' ? '#251418' : '#fff4ec';
         metas[1].content = t === 'light' ? '#fff4ec' : '#251418';
         tb.dataset.t = t;
-        tb.setAttribute('aria-label', 'ธีมสี: ' + NAME[t]);
-        ts.querySelector('[value=' + t + ']').checked = true;
+        const r = ts.querySelector('[value=' + t + ']'); r.checked = true;
+        tb.setAttribute('aria-label', 'ธีมสี: ' + r.parentNode.textContent);
       };
       const pop = (o, back) => {
         ts.classList.toggle('is-open', o);
@@ -255,9 +254,14 @@ export function initSite({ fx = true } = {}) {
         root.classList.add('theme-x'); // no colour fade while the theme changes: one frame without transitions
         show(t);
         requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('theme-x')));
-        if (ts.classList.contains('is-open')) pop(false, true);
       });
-      window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && ts.classList.contains('is-open')) pop(false, true); });
+      ts.addEventListener('click', (e) => { if (e.detail) pop(false, true); }); // a click or tap closes the panel; an arrow key (click with detail 0) does not
+      // arrow keys move through the choices with the panel open; Enter, Space, a click, Esc or Tab out close it
+      window.addEventListener('keydown', (e) => {
+        const k = e.key, open = ts.classList.contains('is-open');
+        if (k === 'Escape' && open) pop(false, true);
+        else if (open && ts.contains(e.target) && (k === 'Enter' || k === ' ')) { e.preventDefault(); e.target.click(); pop(false, true); }
+      });
       document.addEventListener('click', (e) => { if (ts.classList.contains('is-open') && !ts.contains(e.target) && !tb.contains(e.target)) pop(false); });
       ts.addEventListener('focusout', (e) => { if (ts.classList.contains('is-open') && e.relatedTarget && !ts.contains(e.relatedTarget)) pop(false); });
       window.addEventListener('storage', (e) => { if (e.key === 'theme' || e.key === null) show(get()); });

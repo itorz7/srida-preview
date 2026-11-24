@@ -17,36 +17,63 @@
 @font-face{font-family:"Prompt";font-weight:600;font-display:swap;src:url(/fonts/prompt-600-thai.woff2) format("woff2");unicode-range:U+0E01-0E5B,U+200B-200D,U+25CC}
 /* Stand-ins drawn until Prompt and Outfit arrive (B1, F3), scaled so each line takes the width Prompt or Outfit will give it
    and the page does not move when they come.
-   Thai: the system's Noto Sans Thai (Linux, Android) or Sukhumvit Set (iPhone, Mac). Noto's letters are not all wider or
-   narrower than Prompt's by the same amount, so for body text (400) and headings (600) they are split by width into three
-   groups with a scale each: the first rule of a weight covers all of Thai, the later ones win for their letters, and every
-   group lists the combining marks so a letter and its marks stay in one font. Sukhumvit Set follows Prompt closely enough
-   for one scale per weight (500 takes the 400 rule). The Thai rules set no ascent or descent: none of these fonts has a
-   space, so none is the primary font, and with line-height a number only the primary font sets the line box.
-   Latin: Roboto (Android), Noto Sans (Linux) or Arial (Mac, iPhone, Windows). The Noto and Arial scales fit this site's Latin
-   text, which is mostly the spaces between Thai phrases; Noto's curly double quotes are a quarter narrower than Outfit's and
-   get a scale of their own.
-   Windows Thai (Tahoma, Leelawadee UI) is not adjusted: Tahoma's letters differ too much from one to the next for a scale to
-   help, and Leelawadee UI could not be measured.
+   Thai: the system's Noto Sans Thai (Linux, Android), Sukhumvit Set (iPhone, Mac), FreeSerif (the Chrome of PageSpeed
+   Insights, and Linux without Noto Sans Thai) or Tahoma (Windows, where most Thai desktop readers are: t-5585). All of them
+   are rules of one family, "Prompt fallback", lowest priority first (Tahoma, FreeSerif, Sukhumvit Set, Noto): a rule whose
+   font is not installed is skipped, so the last installed one draws (a Mac has Tahoma too; Sukhumvit Set wins there).
+   A font's letters are not all wider or narrower than Prompt's by the same amount, so Noto (three groups), FreeSerif (six)
+   and Tahoma (four, split apart for 400 and for bold) are split by width into groups with a scale each: the first rule of
+   a font and weight covers all of Thai, the later ones win for their letters, and every group lists the combining marks so
+   a letter and its marks stay in one font. Sukhumvit Set follows Prompt closely enough for one scale per weight. There are
+   no 500 rules: 500 takes the 400 ones, so no weight can fall out of the family. The FreeSerif and Tahoma scales fit this
+   site's text as HarfBuzz shapes it (the h1s weigh most); FreeSerif's were then nudged until no page breaks its lines
+   elsewhere. PageSpeed Insights has FreeSerif Regular only, so the 600 rules name only "FreeSerif" and their scales fit the
+   regular widths; naming FreeSerif Bold would give the bold widths on a machine that has it, which these scales do not
+   fit. A rule declared 600 is not made bold, so on PageSpeed Insights headings look regular until Prompt comes.
+   The Thai rules set no ascent or descent: none of these fonts has a space, so none is the primary font, and with
+   line-height a number only the primary font sets the line box.
+   Latin: Roboto (Android), Noto Sans (Linux) or Arial and its metric twin Liberation Sans (Mac, iPhone, Windows, PageSpeed
+   Insights). The Noto and Arial scales fit this site's Latin text, which is mostly the spaces between Thai phrases; Noto's
+   curly double quotes are a quarter narrower than Outfit's and get a scale of their own.
+   On Windows the Tahoma rules draw Thai, so Windows' own Thai fallback (Leelawadee UI) never shows before Prompt.
    Widths come from the real font files (tests/fixtures/thai-system-fonts.json for the Apple and Windows ones);
    tests/font-shift.mjs checks the result on each machine. */
+@font-face{font-family:"Prompt fallback";font-weight:400;src:local("Tahoma");size-adjust:104.3%;unicode-range:U+0E01-0E5B,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:400;src:local("Tahoma");size-adjust:118.6%;unicode-range:U+0E07,U+0E0D,U+0E12-0E13,U+0E15-0E16,U+0E23-0E24,U+0E27,U+0E2C,U+0E2E,U+0E31,U+0E34-0E3A,U+0E46-0E4E,U+0E51,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:400;src:local("Tahoma");size-adjust:89.3%;unicode-range:U+0E02,U+0E06,U+0E09-0E0B,U+0E0F,U+0E17,U+0E29,U+0E2B,U+0E31-0E3A,U+0E40-0E41,U+0E47-0E4E,U+0E54-0E55,U+0E58,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:400;src:local("Tahoma");size-adjust:68.9%;unicode-range:U+0E11,U+0E30-0E31,U+0E34-0E3A,U+0E42-0E44,U+0E47-0E4E,U+0E50,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:600;src:local("Tahoma Bold"),local("Tahoma-Bold");size-adjust:96.5%;unicode-range:U+0E01-0E5B,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:600;src:local("Tahoma Bold"),local("Tahoma-Bold");size-adjust:114.7%;unicode-range:U+0E07,U+0E0D,U+0E27,U+0E31,U+0E34-0E3A,U+0E46-0E4E,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:600;src:local("Tahoma Bold"),local("Tahoma-Bold");size-adjust:65.7%;unicode-range:U+0E30-0E31,U+0E34-0E3A,U+0E42-0E44,U+0E47-0E4E,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:600;src:local("Tahoma Bold"),local("Tahoma-Bold");size-adjust:84.2%;unicode-range:U+0E02,U+0E06,U+0E09-0E0B,U+0E11,U+0E17-0E18,U+0E20,U+0E2B-0E2C,U+0E31-0E3A,U+0E47-0E4E,U+0E51,U+0E54-0E55,U+0E57-0E59,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:400;src:local("FreeSerif");size-adjust:117.6%;unicode-range:U+0E01-0E5B,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:400;src:local("FreeSerif");size-adjust:106.5%;unicode-range:U+0E03,U+0E06,U+0E09,U+0E0B,U+0E0F,U+0E17,U+0E19,U+0E29,U+0E2B-0E2C,U+0E2E,U+0E31-0E3A,U+0E3F-0E41,U+0E47-0E4E,U+0E53-0E55,U+0E58,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:400;src:local("FreeSerif");size-adjust:125.1%;unicode-range:U+0E02,U+0E08,U+0E0A,U+0E10,U+0E13-0E16,U+0E18,U+0E1E-0E1F,U+0E22,U+0E31,U+0E34-0E3A,U+0E45-0E4E,U+0E50,U+0E52,U+0E56,U+0E59,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:400;src:local("FreeSerif");size-adjust:148.6%;unicode-range:U+0E07,U+0E0C-0E0D,U+0E12,U+0E31,U+0E34-0E3A,U+0E47-0E4E,U+0E5A,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:400;src:local("FreeSerif");size-adjust:78.5%;unicode-range:U+0E11,U+0E30-0E31,U+0E34-0E3A,U+0E42,U+0E44,U+0E47-0E4F,U+0E5B,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:400;src:local("FreeSerif");size-adjust:68.7%;unicode-range:U+0E31,U+0E34-0E3A,U+0E43,U+0E47-0E4E,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:600;src:local("FreeSerif");size-adjust:120.0%;unicode-range:U+0E01-0E5B,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:600;src:local("FreeSerif");size-adjust:108.4%;unicode-range:U+0E03,U+0E06,U+0E09,U+0E0B,U+0E0F,U+0E17,U+0E19,U+0E29,U+0E2B-0E2C,U+0E2E,U+0E31-0E3A,U+0E3F-0E41,U+0E47-0E4E,U+0E53-0E55,U+0E58,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:600;src:local("FreeSerif");size-adjust:128.5%;unicode-range:U+0E02,U+0E08,U+0E0A,U+0E10,U+0E13-0E16,U+0E18,U+0E1E-0E1F,U+0E22,U+0E31,U+0E34-0E3A,U+0E45-0E4E,U+0E50,U+0E52,U+0E56,U+0E59,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:600;src:local("FreeSerif");size-adjust:152.8%;unicode-range:U+0E07,U+0E0C-0E0D,U+0E12,U+0E31,U+0E34-0E3A,U+0E47-0E4E,U+0E5A,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:600;src:local("FreeSerif");size-adjust:82.6%;unicode-range:U+0E11,U+0E30-0E31,U+0E34-0E3A,U+0E42,U+0E44,U+0E47-0E4F,U+0E5B,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:600;src:local("FreeSerif");size-adjust:70.2%;unicode-range:U+0E31,U+0E34-0E3A,U+0E43,U+0E47-0E4E,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:400;src:local("Sukhumvit Set Text"),local("SukhumvitSet-Text");size-adjust:106.6%;unicode-range:U+0E01-0E5B,U+200B-200D,U+25CC}
+@font-face{font-family:"Prompt fallback";font-weight:600;src:local("Sukhumvit Set Semi Bold"),local("SukhumvitSet-SemiBold");size-adjust:105.8%;unicode-range:U+0E01-0E5B,U+200B-200D,U+25CC}
 @font-face{font-family:"Prompt fallback";font-weight:400;src:local("Noto Sans Thai Regular"),local("NotoSansThai-Regular"),local("Noto Sans Thai UI Regular"),local("NotoSansThaiUI-Regular");size-adjust:106.9%;unicode-range:U+0E01-0E5B,U+200B-200D,U+25CC}
 @font-face{font-family:"Prompt fallback";font-weight:400;src:local("Noto Sans Thai Regular"),local("NotoSansThai-Regular"),local("Noto Sans Thai UI Regular"),local("NotoSansThaiUI-Regular");size-adjust:102.4%;unicode-range:U+0E04-0E06,U+0E09,U+0E11,U+0E17-0E19,U+0E1C-0E1D,U+0E21,U+0E28-0E29,U+0E2B-0E2C,U+0E2F-0E3A,U+0E40-0E41,U+0E45-0E4F,U+200B-200D,U+25CC}
 @font-face{font-family:"Prompt fallback";font-weight:400;src:local("Noto Sans Thai Regular"),local("NotoSansThai-Regular"),local("Noto Sans Thai UI Regular"),local("NotoSansThaiUI-Regular");size-adjust:115.7%;unicode-range:U+0E07,U+0E12,U+0E1E,U+0E27,U+0E31,U+0E34-0E3A,U+0E3F,U+0E47-0E4E,U+0E50-0E59,U+0E5B,U+200B-200D,U+25CC}
-@font-face{font-family:"Prompt fallback";font-weight:500;src:local("Noto Sans Thai Regular"),local("NotoSansThai-Regular"),local("Noto Sans Thai UI Regular"),local("NotoSansThaiUI-Regular");size-adjust:107.8%;unicode-range:U+0E01-0E5B,U+200B-200D,U+25CC}
 @font-face{font-family:"Prompt fallback";font-weight:600;src:local("Noto Sans Thai Regular"),local("NotoSansThai-Regular"),local("Noto Sans Thai UI Regular"),local("NotoSansThaiUI-Regular");size-adjust:109.4%;unicode-range:U+0E01-0E5B,U+200B-200D,U+25CC}
 @font-face{font-family:"Prompt fallback";font-weight:600;src:local("Noto Sans Thai Regular"),local("NotoSansThai-Regular"),local("Noto Sans Thai UI Regular"),local("NotoSansThaiUI-Regular");size-adjust:104.4%;unicode-range:U+0E04-0E06,U+0E09,U+0E11,U+0E17-0E19,U+0E1C-0E1D,U+0E21,U+0E28-0E29,U+0E2B-0E2C,U+0E2F-0E3A,U+0E40-0E41,U+0E45-0E4F,U+200B-200D,U+25CC}
 @font-face{font-family:"Prompt fallback";font-weight:600;src:local("Noto Sans Thai Regular"),local("NotoSansThai-Regular"),local("Noto Sans Thai UI Regular"),local("NotoSansThaiUI-Regular");size-adjust:117.6%;unicode-range:U+0E07,U+0E12,U+0E1E,U+0E27,U+0E31,U+0E34-0E3A,U+0E3F,U+0E47-0E4E,U+0E50-0E59,U+0E5B,U+200B-200D,U+25CC}
-@font-face{font-family:"Prompt Apple fallback";font-weight:400;src:local("Sukhumvit Set Text"),local("SukhumvitSet-Text");size-adjust:106.6%;unicode-range:U+0E01-0E5B,U+200B-200D,U+25CC}
-@font-face{font-family:"Prompt Apple fallback";font-weight:600;src:local("Sukhumvit Set Semi Bold"),local("SukhumvitSet-SemiBold");size-adjust:105.8%;unicode-range:U+0E01-0E5B,U+200B-200D,U+25CC}
 @font-face{font-family:"Outfit Roboto fallback";font-weight:400;src:local("Roboto"),local("Roboto Regular"),local("Roboto-Regular");size-adjust:96.7%;ascent-override:103.4%;descent-override:26.9%;line-gap-override:0%;unicode-range:U+0020-007E,U+00A0-00FF,U+2013-2014,U+2018-2019,U+201C-201D,U+2022,U+2026,U+2190-2193,U+2212,U+00D7}
 @font-face{font-family:"Outfit Roboto fallback";font-weight:600;src:local("Roboto Bold"),local("Roboto-Bold");size-adjust:97%;ascent-override:103.1%;descent-override:26.8%;line-gap-override:0%;unicode-range:U+0020-007E,U+00A0-00FF,U+2013-2014,U+2018-2019,U+201C-201D,U+2022,U+2026,U+2190-2193,U+2212,U+00D7}
 @font-face{font-family:"Outfit Noto fallback";font-weight:400;src:local("Noto Sans Regular"),local("NotoSans-Regular");size-adjust:91%;ascent-override:109.9%;descent-override:28.6%;unicode-range:U+0020-007E,U+00A0-00FF,U+2013-2014,U+2018-2019,U+201C-201D,U+2022,U+2026,U+2190-2193,U+2212,U+00D7}
 @font-face{font-family:"Outfit Noto fallback";font-weight:600;src:local("Noto Sans Bold"),local("NotoSans-Bold");size-adjust:88%;ascent-override:113.6%;descent-override:29.5%;unicode-range:U+0020-007E,U+00A0-00FF,U+2013-2014,U+2018-2019,U+201C-201D,U+2022,U+2026,U+2190-2193,U+2212,U+00D7}
 @font-face{font-family:"Outfit Noto fallback";font-weight:400;src:local("Noto Sans Regular"),local("NotoSans-Regular");size-adjust:120.4%;unicode-range:U+201C-201D}
 @font-face{font-family:"Outfit Noto fallback";font-weight:600;src:local("Noto Sans Bold"),local("NotoSans-Bold");size-adjust:106%;unicode-range:U+201C-201D}
-@font-face{font-family:"Outfit Arial fallback";font-weight:400;src:local("Arial"),local("ArialMT");size-adjust:90.6%;ascent-override:110.4%;descent-override:28.7%;line-gap-override:0%;unicode-range:U+0020-007E,U+00A0-00FF,U+2013-2014,U+2018-2019,U+201C-201D,U+2022,U+2026,U+2190-2193,U+2212,U+00D7}
-@font-face{font-family:"Outfit Arial fallback";font-weight:600;src:local("Arial Bold"),local("Arial-BoldMT");size-adjust:90.5%;ascent-override:110.5%;descent-override:28.7%;line-gap-override:0%;unicode-range:U+0020-007E,U+00A0-00FF,U+2013-2014,U+2018-2019,U+201C-201D,U+2022,U+2026,U+2190-2193,U+2212,U+00D7}
+@font-face{font-family:"Outfit Arial fallback";font-weight:400;src:local("Arial"),local("ArialMT"),local("Liberation Sans"),local("LiberationSans");size-adjust:90.6%;ascent-override:110.4%;descent-override:28.7%;line-gap-override:0%;unicode-range:U+0020-007E,U+00A0-00FF,U+2013-2014,U+2018-2019,U+201C-201D,U+2022,U+2026,U+2190-2193,U+2212,U+00D7}
+@font-face{font-family:"Outfit Arial fallback";font-weight:600;src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("LiberationSans-Bold");size-adjust:90.5%;ascent-override:110.5%;descent-override:28.7%;line-gap-override:0%;unicode-range:U+0020-007E,U+00A0-00FF,U+2013-2014,U+2018-2019,U+201C-201D,U+2022,U+2026,U+2190-2193,U+2212,U+00D7}
 
 :root{
   --flesh:#f0647e;
@@ -55,7 +82,7 @@
   --on-ink:#f4f1f2;
   --on-ink-2:#b5acb1;
   --night:#120a0d;
-  --f-sans:"Outfit","Outfit Roboto fallback","Outfit Noto fallback","Outfit Arial fallback","Prompt","Prompt fallback","Prompt Apple fallback",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-sans:"Outfit","Outfit Roboto fallback","Outfit Noto fallback","Outfit Arial fallback","Prompt","Prompt fallback",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
   --r-s:14px;
   --r-m:20px;
@@ -336,7 +363,7 @@ main > .slab:not(.slab--top){margin-top:var(--section)}
 .theme-set.is-open{opacity:1;visibility:visible;transform:none;transition-delay:0s}
 .theme-set legend{position:absolute;overflow:hidden;width:1px;height:1px}
 .theme-seg{display:grid;gap:2px}
-.theme-seg label{position:relative;display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:16px;font-size:.94rem;font-weight:500;color:var(--ink-2)}
+.theme-seg label{position:relative;display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:16px;font-size:.94rem;color:var(--ink-2)}
 .theme-seg input{position:absolute;inset:0;margin:0;appearance:none;border-radius:inherit}
 .theme-seg span{flex:1}
 .theme-seg .ok{display:none;color:var(--flesh-ink)}
@@ -853,6 +880,9 @@ tbody th{font-weight:600}
 @media (hover:hover) and (pointer:fine){.chip:hover{color:var(--ink)}.chip[aria-pressed="true"]:hover{color:#fff}}
 .count{margin-left:auto;font-size:.9rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
 .toolbar + .p-grid{margin-top:clamp(24px,3cqi,36px)}
+/* The product page draws its content from the catalog after load. Until then [data-product] holds one screen, so the footer
+   starts below the first screen and does not jump down when the content comes (C3: CLS 0.684 on a phone). */
+[data-product]{min-height:100svh}
 .pd{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:clamp(28px,5cqi,84px);align-items:start;padding-top:clamp(18px,2.4cqi,28px)}
 .pd > *{min-width:0}
 .pd-media{position:sticky;top:92px;aspect-ratio:1;overflow:hidden;background:var(--night);border-radius:var(--r-xl);box-shadow:var(--lift-2)}
@@ -1143,7 +1173,7 @@ tbody th{font-weight:600}
 .strip h3{font-size:clamp(1.2rem,2cqi,1.6rem);line-height:1.3;color:inherit}
 .strip p{font-size:.9rem}
 .strip-codes{display:flex;flex-wrap:wrap;gap:8px}
-.strip .hex{margin:0;background:#fff;color:#0b0b0c;box-shadow:inset 0 0 0 1px rgba(11,11,12,.14)}
+.strip .hex{margin:0;background:#fff;color:#0b0b0c;box-shadow:inset 0 0 0 1px rgba(11,11,12,.14);transition:transform .16s var(--ease)}
 .strip .hex.done{background:#0b0b0c;color:#fff}
 .boiler{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:clamp(28px,4cqi,44px)}
 .boiler-card{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;padding:22px 24px 24px;border-radius:var(--r-l);background:var(--card);box-shadow:var(--pack-sh)}
@@ -1333,7 +1363,7 @@ tbody th{font-weight:600}
 .scene .fc-tilt{transform:none}
 .scene .fc--chat{grid-area:chat;justify-self:start;width:min(17em,100%)}
 .scene .fc--lock{grid-area:lock;justify-self:center;width:min(21em,100%)}
-.scene .fc--lock .fc-in{background:linear-gradient(180deg,#f6fceb,#e2f2ca);color:#2c5e1e}
+.scene .fc--lock .fc-in{background:var(--fc-lock-fc-in-bg);color:var(--fc-lock-fc-in-c)}
 @container page (max-width:640px){
   .scene{grid-template-columns:minmax(0,1fr);grid-template-areas:"bubble" "mascot" "chat"}
   .scene .hero-bubble{justify-self:center}
@@ -1394,13 +1424,15 @@ tbody th{font-weight:600}
 /* Touch screens lay out a section below the first screen only when it comes near (B6): a long page's first layout on a phone
    costs a fraction of the whole. tools/build.py marks the sections (data-cv) and gives each its height as measured on a phone
    and on a tablet (tools/cv.json: the phone height inline, --cv-wide from 600 px wide), so the page is about as long before
-   they are drawn as after. Mouse screens draw everything as before.
+   they are drawn as after. Mouse screens draw everything as before. A browser with no pointer at all (Lighthouse and PageSpeed
+   Insights run headless) reports hover:none too, so their desktop runs hold sections back as a phone does; gating on
+   (pointer:coarse) instead made PSI's desktop /brand/ draw everything at load (style and layout 70 -> 141 ms, a run at 99).
    A held-back section clips its paint at its edge; overflow-clip-margin moves that clip 64 px out, past the longest card
    shadow on a touch screen, so the shadows stay whole (F2). A browser without it (Safari 18) would cut them: it draws every
    section as before. A link to #id (opened or tapped) draws all of them first, so the page scrolls to where the target
    really is, not to where the estimated heights put it (F1). */
 @media (hover:none){@supports (overflow-clip-margin:1px){[data-cv]{content-visibility:auto;overflow-clip-margin:64px}html:has(:target) [data-cv]{content-visibility:visible}}}
-@media (hover:none) and (min-width:600px){[data-cv]{contain-intrinsic-height:var(--cv-wide)!important}}
+@container page (min-width:600px){[data-cv]{contain-intrinsic-height:var(--cv-wide)!important}}
 @media (hover:none),(pointer:coarse){*,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}.bar>.wrap{background:var(--bar-wrap-bg2);transition:none}@keyframes resolve{from{opacity:0;transform:translateY(10px)}}.sec-head.rv>:first-child{clip-path:none;opacity:0}.sec-head.rv.is-in>:first-child{clip-path:none;opacity:1;transition:opacity .7s var(--ease),transform .9s var(--ease)}:root,.mock-win,.fc-in{--contact:0 1px 2px rgba(var(--shade),.08);--lift-1:0 16px 32px -18px rgba(var(--shade-2),.3);--lift-2:0 20px 40px -22px rgba(var(--shade-2),.34);--night-shadow:0 26px 44px -26px rgba(18,10,13,.6);--ghost-sh:inset 0 1px 0 #fff,0 0 0 1px rgba(var(--shade),.09),0 8px 16px -10px rgba(var(--shade-2),.32);--flesh-sh:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(90,10,30,.5),0 10px 22px -10px rgba(196,40,79,.75)}.dark,.night,.feature-tile,.cta-band,.bar{--lift-1:0 20px 36px -22px rgba(0,0,0,.7);--lift-2:0 22px 40px -24px rgba(0,0,0,.75)}.dark{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 0 0 1px rgba(255,255,255,.055),0 30px 40px -30px rgba(70,20,40,.55)}@container page (max-width:980px){.nav{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 0 0 1px rgba(255,255,255,.07),0 24px 40px -20px rgba(0,0,0,.8)}}.fc-in{box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgba(255,255,255,.5),0 1.2em 2.4em -1em rgba(0,0,0,.7)}.fc--lock .fc-in{box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 0 0 1px rgba(140,198,63,.42),0 1.2em 2.4em -1em rgba(0,0,0,.8)}.show-tab[aria-selected="true"]{box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgba(var(--shade),.06),0 8px 16px -8px rgba(var(--shade-2),.3)}}
 .pack .btn--s{white-space:nowrap;padding:0 14px}
 .art-foot a{display:inline-flex;align-items:center;min-height:44px}
